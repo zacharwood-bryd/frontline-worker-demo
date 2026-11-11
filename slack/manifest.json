@@ -1,0 +1,36 @@
+{
+  "_metadata": {
+    "major_version": 2,
+    "minor_version": 1
+  },
+  "display_information": {
+    "name": "Frontline Demo",
+    "description": "Creates a Slack workspace and stages a frontline demo. People do not message this app.",
+    "background_color": "#0b3a4a"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "Frontline Demo",
+      "always_online": false
+    }
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "team:read"
+      ],
+      "user": [
+        "admin.teams:write",
+        "admin.conversations:write",
+        "bookmarks:write",
+        "canvases:write",
+        "chat:write"
+      ]
+    }
+  },
+  "settings": {
+    "org_deploy_enabled": true,
+    "socket_mode_enabled": false,
+    "token_rotation_enabled": false
+  }
+}

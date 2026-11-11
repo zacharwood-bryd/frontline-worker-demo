@@ -1,0 +1,34 @@
+{
+  "gates": [
+    {
+      "id": "install-slack-app",
+      "title": "Install the workspace app on the Enterprise Grid org",
+      "detail": "Create a Slack app from slack/manifest.json and install it on the Enterprise Grid org, not on a single workspace. Grant it to workspaces created later, and approve it if an admin must. This app creates the demo workspace and stages channels. People do not message it. Skip this when that org install already exists."
+    },
+    {
+      "id": "slack-token",
+      "title": "Store the org-admin Slack token",
+      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. Persona tokens use SLACK_TOKEN_LINNEA, SLACK_TOKEN_MORGAN, SLACK_TOKEN_HARRY, and the same pattern for Johan, Erik, Sara, Noah, Maj, and Samir. The agent uses them to create the workspace and post the staged lines. Keep them out of git. Skip a token when it is already stored."
+    },
+    {
+      "id": "frontline-accounts",
+      "title": "Make Linnea a Frontline Member",
+      "detail": "Turn on the Frontline add-on. Linnea is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and she is out of #general and #random. Morgan and Harry are Full Members. Harry is in every store channel. Create an @facilities user group. Use separate Chrome profiles for Morgan and Harry, and test phone mirroring for Linnea. Do this before the webinar. The live demo does not include an admin invite."
+    },
+    {
+      "id": "workflows",
+      "title": "Build the workflows and test them on a phone",
+      "detail": "In Workflow Builder, create Complete my induction, Report an issue, and End-of-shift handover from the forms in the plan, and bookmark each one in its channel. Create Acknowledge as a one-tap workflow and put that link on the price-change button. Test all four as Linnea on a phone, and open the onboarding canvas on that phone. Then re-run the seed so the bookmarks and the button use those links."
+    },
+    {
+      "id": "stage-personas",
+      "title": "Post any staged lines the tokens did not send",
+      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Linnea's fridge 4 reply unsent until Morgan has replied in the thread. Put the fridge 4 photo in Linnea's camera roll before the webinar."
+    },
+    {
+      "id": "fallback-recording",
+      "title": "Pre-record Linnea's beat",
+      "detail": "Record Beat 1 on the phone as a fallback before the webinar. The live path is still Linnea in Slack, with no huddle."
+    }
+  ]
+}
