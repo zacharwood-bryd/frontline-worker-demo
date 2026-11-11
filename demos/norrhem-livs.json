@@ -459,7 +459,7 @@
     {
       "id": "install-slack-app",
       "title": "Install the workspace app on the Enterprise Grid org",
-      "detail": "Create a Slack app from slack/manifest.json and install it on the Enterprise Grid org, not on a single workspace. Grant it to workspaces created later, and approve it if an admin must. This app creates the demo workspace and stages channels. People do not message it. Skip this when that org install already exists."
+      "detail": "Create a Slack app from slack/manifest.json and install it on the Enterprise Grid org, not on a single workspace. Grant it to workspaces created later, and approve it if an admin must. Reinstall after a manifest change so the new scopes are granted. This app creates the workspace, invites users, and stages channels. People do not message it."
     },
     {
       "id": "slack-token",

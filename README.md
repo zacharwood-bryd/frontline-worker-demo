@@ -22,7 +22,7 @@ The first two steps are once per org. The rest are once per workspace, before th
 
 Create a Slack app from [`slack/manifest.json`](slack/manifest.json): Slack API, Create New App, From a manifest. Install it on the Enterprise Grid org, not on one workspace. Grant it to future workspaces. Approve it if the org requires an admin.
 
-The app has no slash command and no conversation. The org-admin token from this install creates each workspace.
+The app has no slash command and no conversation. Reinstall it after any manifest change so Slack grants the new scopes. The org-admin user token from that install creates the workspace, invites users, and stages channels, canvases, and messages.
 
 ### 2. Store the tokens
 

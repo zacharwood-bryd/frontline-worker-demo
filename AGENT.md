@@ -33,7 +33,7 @@ node scripts/seed.mjs
 ## Before any write
 
 1. Confirm the workspace app is installed on the Enterprise Grid org and granted to future workspaces. If it is not, print the `install-slack-app` gate and stop.
-2. You need `SLACK_ADMIN_TOKEN` in the environment, an org-admin user token that can call `admin.teams.create`. If it is missing, print the `slack-token` gate and stop.
+2. You need `SLACK_ADMIN_TOKEN` in the environment, the org-admin user token from the manifest install. That token creates the workspace, invites users, and stages the channels. If it is missing, print the `slack-token` gate and stop. Reinstall the app when `slack/manifest.json` gains scopes, then store the new token.
 3. Persona lines post as that person. `SLACK_TOKEN_MORGAN` creates the canvas. `SLACK_TOKEN_HARRY`, `SLACK_TOKEN_ERIK`, and the other names in the gate post their own lines. If a persona token is missing, leave that line in the pending list and print the `stage-personas` gate. Do not post those lines as someone else.
 
 ## New workspace
