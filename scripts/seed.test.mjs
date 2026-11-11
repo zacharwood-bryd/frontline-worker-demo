@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { NORRHEM_INPUT, buildPlan } from "./plan.mjs";
-import { formatDryRun, runSeed, seedCalls, tokenName } from "./seed.mjs";
+import { formatDryRun, plusAddress, runSeed, seedCalls, tokenName } from "./seed.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(path.join(root, "demos/manual-gates.json"), "utf8"));
@@ -25,7 +25,9 @@ assert.deepEqual(calls.map((call) => call.method).filter((method, index, all) =>
 ]);
 for (const call of calls) assert.ok(allowed.has(call.method));
 assert.equal(calls.some((call) => call.method === "bookmarks.add"), false);
-assert.equal(calls.find((call) => call.id === "canvas").token, "morgan");
+assert.equal(calls.find((call) => call.id === "canvas").token, "astrid");
+assert.equal(plusAddress("owner@example.com", "astrid"), "owner+astrid@example.com");
+assert.equal(plusAddress("owner+old@example.com", "linnea"), "owner+linnea@example.com");
 assert.equal(
   calls.some((call) => call.method === "chat.postMessage" && String(call.body.text).includes("Fridge 4 is at 3°C")),
   false,
@@ -84,11 +86,11 @@ assert.deepEqual(adminOnly.map((call) => call.method), ["admin.teams.create", ..
 assert.equal(partial.links.teamId, "T1");
 assert.equal(partial.links.channels["store-uppsala"], "C_store-uppsala");
 assert.equal(partial.links.canvasId, null);
-assert.ok(partial.pending.some((item) => item.id === "canvas" && item.token === "SLACK_TOKEN_MORGAN"));
+assert.ok(partial.pending.some((item) => item.id === "canvas" && item.token === "SLACK_TOKEN_ASTRID"));
 assert.equal(JSON.stringify(partial.links).includes("xoxp-admin"), false);
 assert.equal(writes.at(-1).teamId, "T1");
 
-const people = ["morgan", "harry", "johan", "erik", "sara", "noah", "maj", "samir", "linnea"];
+const people = ["astrid", "henrik", "johan", "erik", "sara", "nils", "maj", "alva", "linnea"];
 const fullEnv = { SLACK_ADMIN_TOKEN: "xoxp-admin" };
 for (const person of people) fullEnv[tokenName(person)] = `xoxp-${person}`;
 const sent = [];
@@ -102,7 +104,7 @@ const applied = await runSeed({
 assert.equal(applied.pending.length, 0);
 assert.equal(applied.links.canvasId, "F1");
 const canvasCall = sent.find((call) => call.method === "canvases.create");
-assert.equal(canvasCall.authorization, "Bearer xoxp-morgan");
+assert.equal(canvasCall.authorization, "Bearer xoxp-astrid");
 assert.equal(canvasCall.body.channel_id, "C_onboarding");
 assert.equal(canvasCall.body.document_content.type, "markdown");
 const gavlePrice = sent.find((call) => call.method === "chat.postMessage" && call.body.text.startsWith("08:45") && call.body.channel === "C_store-gavle");
@@ -138,5 +140,41 @@ await assert.rejects(
 );
 assert.equal(broken.at(-1), "T9");
 assert.equal(JSON.stringify(broken).includes("xoxp"), false);
+
+const invited = [];
+const withPlus = await runSeed({
+  plan,
+  env: { SLACK_ADMIN_TOKEN: "xoxp-admin", SLACK_PLUS_EMAIL: "owner@example.com" },
+  apply: true,
+  links: {
+    teamId: "T1",
+    channels: Object.fromEntries(plan.channels.map((channel) => [channel.name, `C_${channel.name}`])),
+    messages: {},
+    posted: [],
+    bookmarks: {},
+    invites: {},
+  },
+  fetch: async (url, options) => {
+    const method = url.split("/api/")[1];
+    const body = JSON.parse(options.body);
+    invited.push({ method, body });
+    if (method === "admin.users.invite" && body.email === "owner+nils@example.com") {
+      return { json: async () => ({ ok: false, error: "already_in_team" }) };
+    }
+    if (method === "admin.users.invite") return { json: async () => ({ ok: true, user: { id: "U1" } }) };
+    return { json: async () => ({ ok: false, error: "should-not-run" }) };
+  },
+  writeLinks: () => {},
+});
+assert.equal(invited.length, 9);
+assert.equal(invited.every((call) => call.method === "admin.users.invite"), true);
+assert.equal(invited.find((call) => call.body.email === "owner+linnea@example.com").body.channel_ids.split(",").length, 5);
+assert.equal(invited.find((call) => call.body.email === "owner+henrik@example.com").body.channel_ids.split(",").length, 9);
+assert.equal(invited.find((call) => call.body.real_name === "Astrid").body.email, "owner+astrid@example.com");
+assert.equal(withPlus.links.invites.astrid.ok, true);
+assert.equal(withPlus.links.invites.nils.ok, true);
+assert.equal(withPlus.pending.some((item) => item.id === "invite:nils"), false);
+assert.equal(JSON.stringify(withPlus.links).includes("xoxp"), false);
+assert.match(formatDryRun(plan, { calls: invited.map((call) => ({ ...call, token: "admin", body: call.body })), pending: [] }), /owner\+linnea@example.com/);
 
 console.log("seed.test.mjs ok");

@@ -8,12 +8,12 @@
     {
       "id": "slack-token",
       "title": "Store the org-admin Slack token",
-      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. Persona tokens use SLACK_TOKEN_LINNEA, SLACK_TOKEN_MORGAN, SLACK_TOKEN_HARRY, and the same pattern for Johan, Erik, Sara, Noah, Maj, and Samir. The agent uses them to create the workspace and post the staged lines. Keep them out of git. Skip a token when it is already stored."
+      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. Set SLACK_PLUS_EMAIL to the inbox that should receive every invite, and the seeder invites each person as that address with a plus tag. Persona tokens use SLACK_TOKEN_LINNEA, SLACK_TOKEN_ASTRID, SLACK_TOKEN_HENRIK, and the same pattern for Johan, Erik, Sara, Nils, Maj, and Alva. The agent uses them to create the workspace and post the staged lines. Keep them out of git. Skip a token when it is already stored."
     },
     {
       "id": "frontline-accounts",
       "title": "Make Linnea a Frontline Member",
-      "detail": "Turn on the Frontline add-on. Linnea is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and she is out of #general and #random. Morgan and Harry are Full Members. Harry is in every store channel. Create an @facilities user group. Use separate Chrome profiles for Morgan and Harry, and test phone mirroring for Linnea. Do this before the webinar. The live demo does not include an admin invite."
+      "detail": "Turn on the Frontline add-on. Linnea is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and she is out of #general and #random. Astrid and Henrik are Full Members. Henrik is in every store channel. Every other speaker is a Full Member too. Create an @facilities user group. Use separate Chrome profiles for Astrid and Henrik, and test phone mirroring for Linnea. Do this before the webinar. The live demo does not include an admin invite."
     },
     {
       "id": "workflows",
@@ -23,7 +23,7 @@
     {
       "id": "stage-personas",
       "title": "Post any staged lines the tokens did not send",
-      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Linnea's fridge 4 reply unsent until Morgan has replied in the thread. Put the fridge 4 photo in Linnea's camera roll before the webinar."
+      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Linnea's fridge 4 reply unsent until Astrid has replied in the thread. Put the fridge 4 photo in Linnea's camera roll before the webinar."
     },
     {
       "id": "fallback-recording",

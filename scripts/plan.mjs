@@ -113,7 +113,10 @@ export function buildPlan(input, catalog) {
     names.add(channel.name);
   }
 
-  const linnea = cast.find((person) => person.id === "linnea") || cast[0];
+  const linnea = cast.find((person) => person.part === "frontline") || cast.find((person) => person.id === "linnea") || cast[0];
+  const manager = cast.find((person) => person.part === "manager");
+  const hq = cast.find((person) => person.part === "hq");
+  if (!manager || !hq) throw new Error("Cast needs a manager and an HQ lead.");
   const linneaChannels = channels.filter((channel) => channel.linnea).map((channel) => channel.name);
   if (linnea.channels) {
     const expected = linnea.channels.join(",");
@@ -186,14 +189,14 @@ export function buildPlan(input, catalog) {
     },
     {
       id: "canvas",
-      title: "Add Morgan's onboarding canvas",
-      detail: `Create the canvas "${canvas.title}" with canvases.create as Morgan, tabbed into #${canvas.channel}. Frontline Members can open a canvas a Full Member shares. They do not create one.`,
+      title: `Add ${manager.name}'s onboarding canvas`,
+      detail: `Create the canvas "${canvas.title}" with canvases.create as ${manager.name}, tabbed into #${canvas.channel}. Frontline Members can open a canvas a Full Member shares. They do not create one.`,
     },
     {
       id: "stage-history",
       title: "Post the staged history",
       detail:
-        "Post each staged message with that person's user token. Thread the store acknowledgements under Harry's price-change message. Leave Linnea's moved reply unsent.",
+        `Post each staged message with that person's user token. Thread the store acknowledgements under ${hq.name}'s price-change message. Leave Linnea's moved reply unsent.`,
     },
     {
       id: "bookmarks",
@@ -227,15 +230,15 @@ export function buildPlan(input, catalog) {
     ...steps.slice(0, managerAt),
     {
       label: "Switch",
-      show: "Morgan on desktop",
+      show: `${manager.name} on desktop`,
       say: "Now let's see what that looks like for her store manager.",
     },
     steps[managerAt],
     ...steps.slice(managerAt + 1, hqAt),
     {
       label: "Switch",
-      show: "Harry on desktop",
-      say: "And at HQ, with 40 stores, Harry needs the bigger picture.",
+      show: `${hq.name} on desktop`,
+      say: `And at HQ, with 40 stores, ${hq.name} needs the bigger picture.`,
     },
     ...steps.slice(hqAt),
     {
@@ -273,7 +276,7 @@ export function buildPlan(input, catalog) {
     limits: [
       "Frontline Members cannot use Slackbot, create canvases or lists, or start huddles.",
       "Frontline Members can run workflows and open content a Full Member shares in their channels.",
-      "Slackbot stays on Harry's side.",
+      `Slackbot stays on ${hq.name}'s side.`,
       "Do not show or claim QR sign-in, native shift scheduling, or off-shift blocking.",
     ],
     checks: [
@@ -281,7 +284,7 @@ export function buildPlan(input, catalog) {
       "Acknowledge and the three bookmarked workflows work as Linnea on a phone.",
       "Linnea can open the onboarding canvas on a phone.",
       "Beat 1 is pre-recorded as a fallback.",
-      "Morgan and Harry use separate Chrome profiles, and phone mirroring has been tested.",
+      `${manager.name} and ${hq.name} use separate Chrome profiles, and phone mirroring has been tested.`,
     ],
     manualSteps: gates,
     agentSteps,

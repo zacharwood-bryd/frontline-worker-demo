@@ -41,7 +41,7 @@ for (const name of priceChannels) {
   const prices = plan.stagedMessages.filter((message) => message.channel === name && message.kind === "price-change");
   assert.equal(prices.length, 1);
   assert.match(prices[0].text, /08:45/);
-  assert.equal(prices[0].author, "harry");
+  assert.equal(prices[0].author, "henrik");
   assert.equal(prices[0].blocks, undefined);
 }
 assert.equal(
@@ -66,9 +66,9 @@ assert.deepEqual(shows, [
   "Acknowledge",
   "Report an issue",
   "Handover",
-  "Morgan on desktop",
+  "Astrid on desktop",
   "Manager",
-  "Harry on desktop",
+  "Henrik on desktop",
   "HQ",
   "Spoken close",
 ]);
@@ -81,7 +81,7 @@ assert.match(plan.talkTrack[7].say, /40 stores/);
 assert.match(plan.talkTrack[8].say, /AI-level visibility/);
 assert.match(plan.slackbot.prompt, /food-safety issues and shift handovers/);
 assert.deepEqual(plan.notInLiveDemo, ["A live huddle", "An admin invite"]);
-assert.equal(plan.canvas.owner, "morgan");
+assert.equal(plan.canvas.owner, "astrid");
 assert.match(plan.canvas.markdown, /Cold chain/);
 assert.equal(plan.agentSteps.some((step) => step.id === "handoff"), true);
 assert.match(plan.agentSteps.find((step) => step.id === "slack-surface").detail, /admin\.teams\.create/);
@@ -124,5 +124,13 @@ assert.equal(haystack.includes("apex"), false);
 assert.equal(haystack.includes("named credential"), false);
 assert.match(haystack, /admin\.teams\.create/);
 assert.match(haystack, /do not run an admin invite/);
+assert.equal(haystack.includes("morgan"), false);
+assert.equal(haystack.includes("harry"), false);
+const speakers = [...plan.cast, ...plan.people];
+assert.equal(speakers.length, 9);
+for (const person of speakers) {
+  assert.equal(person.account === "Frontline Member" || person.account === "Full Member", true);
+  assert.ok(person.channels.length > 0);
+}
 
 console.log("plan.test.mjs ok");

@@ -15,6 +15,38 @@ export function tokenName(personId) {
   return `SLACK_TOKEN_${String(personId).toUpperCase()}`;
 }
 
+export function plusAddress(baseEmail, personId) {
+  const match = String(baseEmail || "").trim().match(/^([^@\s+]+)(?:\+[^@]*)?@([^@\s]+)$/);
+  if (!match) throw new Error("SLACK_PLUS_EMAIL must look like name@domain.");
+  if (!/^[a-z0-9-]+$/.test(personId)) throw new Error(`Person id is not email-safe: ${personId}`);
+  return `${match[1]}+${personId}@${match[2]}`;
+}
+
+export function inviteCalls(plan, baseEmail) {
+  const people = [...(plan.cast || []), ...(plan.people || [])];
+  return people.map((person) => ({
+    id: `invite:${person.id}`,
+    method: "admin.users.invite",
+    token: "admin",
+    body: {
+      team_id: "{{team}}",
+      email: plusAddress(baseEmail, person.id),
+      real_name: person.fullName || person.name,
+      channel_ids: (person.channels || []).map((name) => `{{channel:${name}}}`).join(","),
+      resend: true,
+    },
+  }));
+}
+
+export function callsFor(plan, env = {}) {
+  const calls = seedCalls(plan);
+  if (!env.SLACK_PLUS_EMAIL) return calls;
+  const invites = inviteCalls(plan, env.SLACK_PLUS_EMAIL);
+  const canvasAt = calls.findIndex((call) => call.id === "canvas");
+  const index = canvasAt === -1 ? calls.length : canvasAt;
+  return [...calls.slice(0, index), ...invites, ...calls.slice(index)];
+}
+
 export function seedCalls(plan) {
   const calls = [
     {
@@ -99,6 +131,7 @@ function blankState(plan, links) {
     bookmarks: { ...(links?.bookmarks || {}) },
     messages: { ...(links?.messages || {}) },
     posted: [...(links?.posted || [])],
+    invites: links?.invites && !Array.isArray(links.invites) ? { ...links.invites } : {},
   };
 }
 
@@ -125,6 +158,7 @@ function alreadyDone(call, state) {
   if (call.id === "canvas") return Boolean(state.canvasId);
   if (call.method === "bookmarks.add") return Boolean(state.bookmarks[call.body.title]);
   if (call.method === "chat.postMessage") return state.posted.includes(call.id);
+  if (call.id.startsWith("invite:")) return state.invites?.[call.id.slice("invite:".length)]?.ok === true;
   return false;
 }
 
@@ -144,8 +178,12 @@ async function slackCall(fetchImpl, method, token, body) {
   return data;
 }
 
-export async function runSeed({ plan, env = {}, apply = false, fetch: fetchImpl = fetch, links = null, writeLinks = () => {} }) {
-  const calls = seedCalls(plan);
+function inviteFailure(error) {
+  return /already_in_team|already_invited|user_already_exists|already_in_workspace/.test(error.message);
+}
+
+export async function runSeed({ plan, env = {}, apply = false, fetch: fetchImpl = fetch, links = null, writeLinks = () => {}, inviteDelayMs = 0 }) {
+  const calls = callsFor(plan, env);
   const state = blankState(plan, links);
   const pending = [];
 
@@ -174,8 +212,24 @@ export async function runSeed({ plan, env = {}, apply = false, fetch: fetchImpl 
     }
     let data;
     try {
+      if (call.method === "admin.users.invite" && inviteDelayMs > 0) {
+        await new Promise((resolve) => setTimeout(resolve, inviteDelayMs));
+      }
       data = await slackCall(fetchImpl, call.method, secret, resolved.body);
     } catch (error) {
+      if (call.method === "admin.users.invite") {
+        const personId = call.id.slice("invite:".length);
+        const already = inviteFailure(error);
+        state.invites[personId] = {
+          email: resolved.body.email,
+          realName: resolved.body.real_name,
+          ok: already,
+          error: already ? undefined : error.message,
+        };
+        if (!already) pending.push({ id: call.id, token: tokenName(call.token), reason: error.message });
+        await writeLinks(state);
+        continue;
+      }
       await writeLinks(state);
       throw error;
     }
@@ -186,6 +240,15 @@ export async function runSeed({ plan, env = {}, apply = false, fetch: fetchImpl 
     if (call.method === "chat.postMessage") {
       state.posted.push(call.id);
       if (data.ts) state.messages[call.id] = data.ts;
+    }
+    if (call.method === "admin.users.invite") {
+      const personId = call.id.slice("invite:".length);
+      state.invites[personId] = {
+        email: resolved.body.email,
+        realName: resolved.body.real_name,
+        ok: true,
+        userId: data.user?.id || data.user_id || null,
+      };
     }
     await writeLinks(state);
   }
@@ -204,7 +267,7 @@ export function formatDryRun(plan, result) {
     "Slack calls:",
   ];
   for (const call of result.calls) {
-    const where = call.body.team_name || call.body.name || call.body.title || call.body.channel || call.id;
+    const where = call.body.email || call.body.team_name || call.body.name || call.body.title || call.body.channel || call.id;
     lines.push(`- ${call.method} ${where} as ${call.token}`);
   }
   lines.push("", "Staged lines:");
@@ -258,6 +321,7 @@ async function main() {
     apply,
     links,
     writeLinks: (state) => writeFileSync(linksPath, `${JSON.stringify(state, null, 2)}\n`),
+    inviteDelayMs: apply ? 1200 : 0,
   });
   console.log(formatDryRun(plan, result));
   if (result.mode === "blocked") {
@@ -267,9 +331,9 @@ async function main() {
     return;
   }
   if (result.pending.length) {
-    console.log("\nNot sent, token missing:");
+    console.log("\nNot sent:");
     for (const item of result.pending) {
-      console.log(`- ${item.id} needs ${item.token}${item.reason ? ` (${item.reason})` : ""}`);
+      console.log(`- ${item.id}: ${item.reason || `needs ${item.token}`}`);
     }
   }
   console.log(`\n${result.mode}`);
