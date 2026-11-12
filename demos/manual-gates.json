@@ -1,0 +1,34 @@
+{
+  "gates": [
+    {
+      "id": "install-slack-app",
+      "title": "Install the workspace app on the Enterprise Grid org",
+      "detail": "Create a Slack app from slack/manifest.json and install it on the Enterprise Grid org, not on a single workspace. Grant it to workspaces created later, and approve it if an admin must. Reinstall after a manifest change so the new scopes are granted. This app creates the workspace, invites users, and stages channels. People do not message it."
+    },
+    {
+      "id": "slack-token",
+      "title": "Store the org-admin Slack token",
+      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. The shared cast is Alex, Sam, Jordan, Riley, Casey, and Jamie. Persona tokens use SLACK_TOKEN_ALEX, SLACK_TOKEN_SAM, SLACK_TOKEN_JORDAN, SLACK_TOKEN_RILEY, SLACK_TOKEN_CASEY, and SLACK_TOKEN_JAMIE. Reuse these users for later demos. Keep the tokens out of git."
+    },
+    {
+      "id": "frontline-accounts",
+      "title": "Make Alex a Frontline Member",
+      "detail": "Turn on the Frontline add-on. Alex is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and they are out of #general and #random. Sam and Jordan are Full Members. Jordan is in every store channel. Riley, Casey, and Jamie are Full Members too. Create an @facilities user group. Use separate Chrome profiles for Sam and Jordan, and test phone mirroring for Alex. Do this before the webinar. The live demo does not include an admin invite."
+    },
+    {
+      "id": "workflows",
+      "title": "Build the workflows and test them on a phone",
+      "detail": "In Workflow Builder, create Complete my induction, Report an issue, and End-of-shift handover from the forms in the plan, and bookmark each one in its channel. Create Acknowledge as a one-tap workflow and put that link on the price-change button. Test all four as Alex on a phone, and open the onboarding canvas on that phone. Then re-run the seed so the bookmarks and the button use those links."
+    },
+    {
+      "id": "stage-personas",
+      "title": "Post any staged lines the tokens did not send",
+      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Alex's fridge 4 reply unsent until Sam has replied in the thread. Put the fridge 4 photo in Alex's camera roll before the webinar."
+    },
+    {
+      "id": "fallback-recording",
+      "title": "Pre-record Alex's beat",
+      "detail": "Record Beat 1 on the phone as a fallback before the webinar. The live path is still Alex in Slack, with no huddle."
+    }
+  ]
+}

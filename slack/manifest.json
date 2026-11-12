@@ -1,0 +1,105 @@
+{
+  "_metadata": {
+    "major_version": 2,
+    "minor_version": 1
+  },
+  "display_information": {
+    "name": "Frontline Demo",
+    "description": "Creates a Slack workspace and stages a frontline demo. People do not message this app.",
+    "background_color": "#0b3a4a"
+  },
+  "features": {
+    "bot_user": {
+      "display_name": "Frontline Demo",
+      "always_online": false
+    }
+  },
+  "oauth_config": {
+    "scopes": {
+      "bot": [
+        "bookmarks:read",
+        "bookmarks:write",
+        "canvases:read",
+        "canvases:write",
+        "channels:history",
+        "channels:join",
+        "channels:manage",
+        "channels:read",
+        "chat:write",
+        "chat:write.customize",
+        "chat:write.public",
+        "files:read",
+        "files:write",
+        "groups:history",
+        "groups:read",
+        "groups:write",
+        "im:history",
+        "im:read",
+        "im:write",
+        "mpim:history",
+        "mpim:read",
+        "mpim:write",
+        "pins:read",
+        "pins:write",
+        "reactions:read",
+        "reactions:write",
+        "team:read",
+        "triggers:write",
+        "usergroups:read",
+        "usergroups:write",
+        "users:read",
+        "users:read.email"
+      ],
+      "user": [
+        "admin.conversations:read",
+        "admin.conversations:write",
+        "admin.invites:read",
+        "admin.invites:write",
+        "admin.teams:read",
+        "admin.teams:write",
+        "admin.usergroups:read",
+        "admin.usergroups:write",
+        "admin.users:read",
+        "admin.users:write",
+        "admin.workflows:read",
+        "admin.workflows:write",
+        "bookmarks:read",
+        "bookmarks:write",
+        "canvases:read",
+        "canvases:write",
+        "channels:history",
+        "channels:read",
+        "channels:write",
+        "channels:write.invites",
+        "channels:write.topic",
+        "chat:write",
+        "chat:write.customize",
+        "files:read",
+        "files:write",
+        "groups:history",
+        "groups:read",
+        "groups:write",
+        "im:history",
+        "im:read",
+        "im:write",
+        "mpim:history",
+        "mpim:read",
+        "mpim:write",
+        "pins:read",
+        "pins:write",
+        "reactions:read",
+        "reactions:write",
+        "usergroups:read",
+        "usergroups:write",
+        "users:read",
+        "users:read.email",
+        "users.profile:write"
+      ]
+    }
+  },
+  "settings": {
+    "org_deploy_enabled": true,
+    "socket_mode_enabled": false,
+    "token_rotation_enabled": false
+  }
+}
