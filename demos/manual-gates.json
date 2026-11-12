@@ -8,27 +8,27 @@
     {
       "id": "slack-token",
       "title": "Store the org-admin Slack token",
-      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. Set SLACK_PLUS_EMAIL to the inbox that should receive every invite, and the seeder invites each person as that address with a plus tag. Persona tokens use SLACK_TOKEN_LINNEA, SLACK_TOKEN_ASTRID, SLACK_TOKEN_HENRIK, and the same pattern for Johan, Erik, Sara, Nils, Maj, and Alva. The agent uses them to create the workspace and post the staged lines. Keep them out of git. Skip a token when it is already stored."
+      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. The shared cast is Alex, Sam, Jordan, Riley, Casey, and Jamie. Persona tokens use SLACK_TOKEN_ALEX, SLACK_TOKEN_SAM, SLACK_TOKEN_JORDAN, SLACK_TOKEN_RILEY, SLACK_TOKEN_CASEY, and SLACK_TOKEN_JAMIE. Reuse these users for later demos. Keep the tokens out of git."
     },
     {
       "id": "frontline-accounts",
-      "title": "Make Linnea a Frontline Member",
-      "detail": "Turn on the Frontline add-on. Linnea is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and she is out of #general and #random. Astrid and Henrik are Full Members. Henrik is in every store channel. Every other speaker is a Full Member too. Create an @facilities user group. Use separate Chrome profiles for Astrid and Henrik, and test phone mirroring for Linnea. Do this before the webinar. The live demo does not include an admin invite."
+      "title": "Make Alex a Frontline Member",
+      "detail": "Turn on the Frontline add-on. Alex is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and they are out of #general and #random. Sam and Jordan are Full Members. Jordan is in every store channel. Riley, Casey, and Jamie are Full Members too. Create an @facilities user group. Use separate Chrome profiles for Sam and Jordan, and test phone mirroring for Alex. Do this before the webinar. The live demo does not include an admin invite."
     },
     {
       "id": "workflows",
       "title": "Build the workflows and test them on a phone",
-      "detail": "In Workflow Builder, create Complete my induction, Report an issue, and End-of-shift handover from the forms in the plan, and bookmark each one in its channel. Create Acknowledge as a one-tap workflow and put that link on the price-change button. Test all four as Linnea on a phone, and open the onboarding canvas on that phone. Then re-run the seed so the bookmarks and the button use those links."
+      "detail": "In Workflow Builder, create Complete my induction, Report an issue, and End-of-shift handover from the forms in the plan, and bookmark each one in its channel. Create Acknowledge as a one-tap workflow and put that link on the price-change button. Test all four as Alex on a phone, and open the onboarding canvas on that phone. Then re-run the seed so the bookmarks and the button use those links."
     },
     {
       "id": "stage-personas",
       "title": "Post any staged lines the tokens did not send",
-      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Linnea's fridge 4 reply unsent until Astrid has replied in the thread. Put the fridge 4 photo in Linnea's camera roll before the webinar."
+      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Alex's fridge 4 reply unsent until Sam has replied in the thread. Put the fridge 4 photo in Alex's camera roll before the webinar."
     },
     {
       "id": "fallback-recording",
-      "title": "Pre-record Linnea's beat",
-      "detail": "Record Beat 1 on the phone as a fallback before the webinar. The live path is still Linnea in Slack, with no huddle."
+      "title": "Pre-record Alex's beat",
+      "detail": "Record Beat 1 on the phone as a fallback before the webinar. The live path is still Alex in Slack, with no huddle."
     }
   ]
 }

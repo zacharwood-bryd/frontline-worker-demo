@@ -113,18 +113,18 @@ export function buildPlan(input, catalog) {
     names.add(channel.name);
   }
 
-  const linnea = cast.find((person) => person.part === "frontline") || cast.find((person) => person.id === "linnea") || cast[0];
+  const frontline = cast.find((person) => person.part === "frontline") || cast[0];
   const manager = cast.find((person) => person.part === "manager");
   const hq = cast.find((person) => person.part === "hq");
   if (!manager || !hq) throw new Error("Cast needs a manager and an HQ lead.");
-  const linneaChannels = channels.filter((channel) => channel.linnea).map((channel) => channel.name);
-  if (linnea.channels) {
-    const expected = linnea.channels.join(",");
-    if (linneaChannels.join(",") !== expected) {
-      throw new Error("Linnea's channel list does not match the channels marked for her.");
+  const frontlineChannels = channels.filter((channel) => channel.frontline).map((channel) => channel.name);
+  if (frontline.channels) {
+    const expected = frontline.channels.join(",");
+    if (frontlineChannels.join(",") !== expected) {
+      throw new Error(`${frontline.name}'s channel list does not match the channels marked for them.`);
     }
   }
-  if (linneaChannels.length > FRONTLINE_CHANNEL_CAP) {
+  if (frontlineChannels.length > FRONTLINE_CHANNEL_CAP) {
     throw new Error(`A Frontline Member can have at most ${FRONTLINE_CHANNEL_CAP} channels.`);
   }
 
@@ -185,7 +185,7 @@ export function buildPlan(input, catalog) {
     {
       id: "channels",
       title: "Create the channels",
-      detail: `Create ${channels.length} channels with admin.conversations.create in the new workspace. Linnea's home is ${linneaChannels.join(", ")}. She is not a member of the other store channels.`,
+      detail: `Create ${channels.length} channels with admin.conversations.create in the new workspace. ${frontline.name}'s home is ${frontlineChannels.join(", ")}. They are not a member of the other store channels.`,
     },
     {
       id: "canvas",
@@ -196,7 +196,7 @@ export function buildPlan(input, catalog) {
       id: "stage-history",
       title: "Post the staged history",
       detail:
-        `Post each staged message with that person's user token. Thread the store acknowledgements under ${hq.name}'s price-change message. Leave Linnea's moved reply unsent.`,
+        `Post each staged message with that person's user token. Thread the store acknowledgements under ${hq.name}'s price-change message. Leave ${frontline.name}'s moved reply unsent.`,
     },
     {
       id: "bookmarks",
@@ -212,7 +212,7 @@ export function buildPlan(input, catalog) {
     {
       id: "handoff",
       title: "Hand off the live demo",
-      detail: `Stop here. ${company} opens with Linnea already in Slack. Do not run an admin invite on stage, and do not start a huddle.`,
+      detail: `Stop here. ${company} opens with ${frontline.name} already in Slack. Do not run an admin invite on stage, and do not start a huddle.`,
     },
   ];
 
@@ -258,7 +258,7 @@ export function buildPlan(input, catalog) {
     cast,
     people: input.people || [],
     channels,
-    linneaChannels,
+    frontlineChannels,
     storyScale: input.storyScale || null,
     slack: {
       mode: "workspace",
@@ -280,9 +280,9 @@ export function buildPlan(input, catalog) {
       "Do not show or claim QR sign-in, native shift scheduling, or off-shift blocking.",
     ],
     checks: [
-      "The Frontline add-on is on, and Linnea is a Frontline Member.",
-      "Acknowledge and the three bookmarked workflows work as Linnea on a phone.",
-      "Linnea can open the onboarding canvas on a phone.",
+      `The Frontline add-on is on, and ${frontline.name} is a Frontline Member.`,
+      `Acknowledge and the three bookmarked workflows work as ${frontline.name} on a phone.`,
+      `${frontline.name} can open the onboarding canvas on a phone.`,
       "Beat 1 is pre-recorded as a fallback.",
       `${manager.name} and ${hq.name} use separate Chrome profiles, and phone mirroring has been tested.`,
     ],

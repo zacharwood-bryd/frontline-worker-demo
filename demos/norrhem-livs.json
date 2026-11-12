@@ -5,18 +5,18 @@
   "company": "Norrhem Livs",
   "useCase": "A store associate, her manager, and regional ops run a Saturday price change and a warm fridge in Slack.",
   "beats": [
-    "Linnea opens Slack on her phone. Her home has five channels.",
-    "In #onboarding she opens Astrid's canvas, then runs Complete my induction.",
-    "In #store-uppsala she opens Henrik's 08:45 price change and taps Acknowledge.",
-    "Fridge 3 reads warm. In #food-safety she runs Report an issue with the location, a photo, and the 9°C reading.",
-    "She runs End-of-shift handover. It posts to #store-uppsala for the evening shift.",
-    "Astrid sees the induction, the fridge thread, and the handover. Linnea's moved reply follows Astrid's instruction, and Astrid marks the thread resolved.",
-    "Henrik sees which stores have acknowledged the price change, nudges Sundsvall and Örebro, and asks Slackbot to summarise the week's food-safety issues and handovers."
+    "Alex opens Slack on their phone. Their home has five channels.",
+    "In #onboarding they open Sam's canvas, then run Complete my induction.",
+    "In #store-uppsala they open Jordan's 08:45 price change and tap Acknowledge.",
+    "Fridge 3 reads warm. In #food-safety they run Report an issue with the location, a photo, and the 9°C reading.",
+    "They run End-of-shift handover. It posts to #store-uppsala for the evening shift.",
+    "Sam sees the induction, the fridge thread, and the handover. Alex's moved reply follows Sam's instruction, and Sam marks the thread resolved.",
+    "Jordan sees which stores have acknowledged the price change, nudges Sundsvall and Örebro, and asks Slackbot to summarise the week's food-safety issues and handovers."
   ],
   "cast": [
     {
-      "id": "linnea",
-      "name": "Linnea",
+      "id": "alex",
+      "name": "Alex",
       "role": "Store associate, Uppsala",
       "part": "frontline",
       "account": "Frontline Member",
@@ -30,8 +30,8 @@
       ]
     },
     {
-      "id": "astrid",
-      "name": "Astrid",
+      "id": "sam",
+      "name": "Sam",
       "role": "Store manager, Uppsala",
       "part": "manager",
       "account": "Full Member",
@@ -45,8 +45,8 @@
       ]
     },
     {
-      "id": "henrik",
-      "name": "Henrik",
+      "id": "jordan",
+      "name": "Jordan",
       "role": "Regional ops, HQ",
       "part": "hq",
       "account": "Full Member",
@@ -66,17 +66,8 @@
   ],
   "people": [
     {
-      "id": "johan",
-      "name": "Johan",
-      "role": "Evening associate, Uppsala",
-      "account": "Full Member",
-      "channels": [
-        "store-uppsala"
-      ]
-    },
-    {
-      "id": "erik",
-      "name": "Erik",
+      "id": "riley",
+      "name": "Riley",
       "role": "Store manager, Gävle",
       "account": "Full Member",
       "channels": [
@@ -86,8 +77,8 @@
       ]
     },
     {
-      "id": "sara",
-      "name": "Sara",
+      "id": "casey",
+      "name": "Casey",
       "role": "Store manager, Västerås",
       "account": "Full Member",
       "channels": [
@@ -97,30 +88,12 @@
       ]
     },
     {
-      "id": "nils",
-      "name": "Nils",
+      "id": "jamie",
+      "name": "Jamie",
       "role": "Store manager, Sundsvall",
       "account": "Full Member",
       "channels": [
         "store-sundsvall"
-      ]
-    },
-    {
-      "id": "maj",
-      "name": "Maj",
-      "role": "Store manager, Örebro",
-      "account": "Full Member",
-      "channels": [
-        "store-orebro"
-      ]
-    },
-    {
-      "id": "alva",
-      "name": "Alva",
-      "role": "Previous starter, Uppsala",
-      "account": "Full Member",
-      "channels": [
-        "onboarding"
       ]
     }
   ],
@@ -128,29 +101,29 @@
     {
       "name": "store-uppsala",
       "purpose": "Uppsala floor, handovers, and the weekend price change.",
-      "linnea": true,
+      "frontline": true,
       "store": "Uppsala",
       "priceChange": true
     },
     {
       "name": "region-mitt",
       "purpose": "Mitt region operations. Price-change acknowledgements land here.",
-      "linnea": true
+      "frontline": true
     },
     {
       "name": "food-safety",
       "purpose": "Temperature and hygiene issues for every store in Mitt.",
-      "linnea": true
+      "frontline": true
     },
     {
       "name": "announcements",
       "purpose": "HQ notes that every store needs.",
-      "linnea": true
+      "frontline": true
     },
     {
       "name": "onboarding",
       "purpose": "New starters. The Uppsala guide is the channel canvas.",
-      "linnea": true
+      "frontline": true
     },
     {
       "name": "store-gavle",
@@ -172,12 +145,12 @@
     },
     {
       "name": "store-orebro",
-      "purpose": "Örebro floor. Has not acknowledged the weekend prices.",
+      "purpose": "Örebro floor. The price change is posted and nobody in the store has replied.",
       "store": "Örebro",
       "priceChange": true
     }
   ],
-  "linneaChannels": [
+  "frontlineChannels": [
     "store-uppsala",
     "region-mitt",
     "food-safety",
@@ -192,13 +165,13 @@
     "mode": "workspace",
     "workspaceName": "Norrhem Livs",
     "workspaceDomain": "norrhem-livs",
-    "story": "Norrhem Livs\nA store associate, her manager, and regional ops run a Saturday price change and a warm fridge in Slack.\n1. Linnea opens Slack on her phone. Her home has five channels.\n2. In #onboarding she opens Astrid's canvas, then runs Complete my induction.\n3. In #store-uppsala she opens Henrik's 08:45 price change and taps Acknowledge.\n4. Fridge 3 reads warm. In #food-safety she runs Report an issue with the location, a photo, and the 9°C reading.\n5. She runs End-of-shift handover. It posts to #store-uppsala for the evening shift.\n6. Astrid sees the induction, the fridge thread, and the handover. Linnea's moved reply follows Astrid's instruction, and Astrid marks the thread resolved.\n7. Henrik sees which stores have acknowledged the price change, nudges Sundsvall and Örebro, and asks Slackbot to summarise the week's food-safety issues and handovers."
+    "story": "Norrhem Livs\nA store associate, her manager, and regional ops run a Saturday price change and a warm fridge in Slack.\n1. Alex opens Slack on their phone. Their home has five channels.\n2. In #onboarding they open Sam's canvas, then run Complete my induction.\n3. In #store-uppsala they open Jordan's 08:45 price change and tap Acknowledge.\n4. Fridge 3 reads warm. In #food-safety they run Report an issue with the location, a photo, and the 9°C reading.\n5. They run End-of-shift handover. It posts to #store-uppsala for the evening shift.\n6. Sam sees the induction, the fridge thread, and the handover. Alex's moved reply follows Sam's instruction, and Sam marks the thread resolved.\n7. Jordan sees which stores have acknowledged the price change, nudges Sundsvall and Örebro, and asks Slackbot to summarise the week's food-safety issues and handovers."
   },
   "canvas": {
-    "owner": "astrid",
+    "owner": "sam",
     "channel": "onboarding",
     "title": "Uppsala store guide",
-    "markdown": "# Uppsala store guide\n\nWelcome to Norrhem Livs Uppsala. Your work is in Slack. These are the channels and the rules for this store.\n\n## Contacts\n\n| Who | Role | Channel |\n| --- | --- | --- |\n| Astrid | Store manager | #store-uppsala |\n| Facilities | Fridges, freezers, doors | #food-safety |\n| Henrik | Regional ops, Mitt | #region-mitt |\n\n## Cold chain\n\n- Fridges stay at 0–5°C. Freezers stay at −18°C or colder.\n- At 8°C or higher, move the stock and run Report an issue in #food-safety.\n- Leave the reading and the new location in the thread for the next shift.\n\n## Allergens\n\n- Unlabelled prep does not go on the shelf.\n- A spill of a major allergen is a food-safety issue.\n\n## Before your first shift\n\nRun Complete my induction from the bookmark in #onboarding. Tick the food-safety sign-off."
+    "markdown": "# Uppsala store guide\n\nWelcome to Norrhem Livs Uppsala. Your work is in Slack. These are the channels and the rules for this store.\n\n## Contacts\n\n| Who | Role | Channel |\n| --- | --- | --- |\n| Sam | Store manager | #store-uppsala |\n| Facilities | Fridges, freezers, doors | #food-safety |\n| Jordan | Regional ops, Mitt | #region-mitt |\n\n## Cold chain\n\n- Fridges stay at 0–5°C. Freezers stay at −18°C or colder.\n- At 8°C or higher, move the stock and run Report an issue in #food-safety.\n- Leave the reading and the new location in the thread for the next shift.\n\n## Allergens\n\n- Unlabelled prep does not go on the shelf.\n- A spill of a major allergen is a food-safety issue.\n\n## Before your first shift\n\nRun Complete my induction from the bookmark in #onboarding. Tick the food-safety sign-off."
   },
   "workflows": [
     {
@@ -216,13 +189,13 @@
         "Food-safety sign-off"
       ],
       "demoValues": {
-        "Name": "Linnea",
+        "Name": "Alex",
         "Store": "Uppsala",
         "I have read the cold-chain policy": "Yes",
         "I have read the allergen policy": "Yes",
         "Food-safety sign-off": "Yes"
       },
-      "post": "Linnea completed induction at Uppsala. Cold-chain policy, allergen policy, and food-safety sign-off are done."
+      "post": "Alex completed induction at Uppsala. Cold-chain policy, allergen policy, and food-safety sign-off are done."
     },
     {
       "id": "issue",
@@ -243,7 +216,7 @@
         "Photo": "Take it on the phone",
         "What happened": "Stock is still in the fridge"
       },
-      "post": "Fridge 3 is reading 9°C. Stock is still in the fridge. Photo attached. Astrid and facilities are on this."
+      "post": "Fridge 3 is reading 9°C. Stock is still in the fridge. Photo attached. Sam and facilities are on this."
     },
     {
       "id": "handover",
@@ -298,42 +271,42 @@
   "stagedMessages": [
     {
       "id": "uppsala-evening",
-      "author": "johan",
+      "author": "sam",
       "channel": "store-uppsala",
       "kind": "history",
       "text": "Evening handover. Bread oven was 20 minutes late. Dairy is in the chiller. Floor by produce is dry. Tills 1 to 4 were live at close."
     },
     {
       "id": "uppsala-morning",
-      "author": "astrid",
+      "author": "sam",
       "channel": "store-uppsala",
       "kind": "history",
-      "text": "Morning Linnea. Henrik's price change hits this channel at 08:45. Labels are in the back office. Old ones off before open."
+      "text": "Morning Alex. Jordan's price change hits this channel at 08:45. Labels are in the back office. Old ones off before open."
     },
     {
       "id": "uppsala-price",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "store-uppsala",
       "kind": "price-change",
       "text": "08:45 · Weekend prices, Saturday and Sunday. Acknowledge before you open.\n\n• Bananas, 22 kr/kg (was 28)\n• Arla mellanmjölk 1.5 L, 2 for 24 kr\n• Salmon fillet, 149 kr/kg\n\nNew labels are in the back office. Old shelf labels come off before open."
     },
     {
       "id": "gavle-evening",
-      "author": "erik",
+      "author": "riley",
       "channel": "store-gavle",
       "kind": "history",
       "text": "Evening handover, Gävle. Two crates of apples short on the produce delivery. Fridge temps were fine at close."
     },
     {
       "id": "gavle-price",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "store-gavle",
       "kind": "price-change",
       "text": "08:45 · Weekend prices, Saturday and Sunday. Acknowledge before you open.\n\n• Bananas, 22 kr/kg (was 28)\n• Arla mellanmjölk 1.5 L, 2 for 24 kr\n• Salmon fillet, 149 kr/kg\n\nNew labels are in the back office. Old shelf labels come off before open."
     },
     {
       "id": "gavle-ack",
-      "author": "erik",
+      "author": "riley",
       "channel": "store-gavle",
       "kind": "acknowledgement",
       "text": "Acknowledged. New labels are up.",
@@ -341,21 +314,21 @@
     },
     {
       "id": "vasteras-evening",
-      "author": "sara",
+      "author": "casey",
       "channel": "store-vasteras",
       "kind": "history",
       "text": "Evening handover, Västerås. Broken jar of pickled herring in aisle 3, cleaned and logged. No temp issues."
     },
     {
       "id": "vasteras-price",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "store-vasteras",
       "kind": "price-change",
       "text": "08:45 · Weekend prices, Saturday and Sunday. Acknowledge before you open.\n\n• Bananas, 22 kr/kg (was 28)\n• Arla mellanmjölk 1.5 L, 2 for 24 kr\n• Salmon fillet, 149 kr/kg\n\nNew labels are in the back office. Old shelf labels come off before open."
     },
     {
       "id": "vasteras-ack",
-      "author": "sara",
+      "author": "casey",
       "channel": "store-vasteras",
       "kind": "acknowledgement",
       "text": "Acknowledged. Labels swapped before the dairy delivery.",
@@ -363,128 +336,114 @@
     },
     {
       "id": "sundsvall-evening",
-      "author": "nils",
+      "author": "jamie",
       "channel": "store-sundsvall",
       "kind": "history",
       "text": "Evening handover, Sundsvall. Quiet close. Freezer 1 alarm cleared itself. Weekend labels were still the old ones when I left."
     },
     {
       "id": "sundsvall-price",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "store-sundsvall",
       "kind": "price-change",
       "text": "08:45 · Weekend prices, Saturday and Sunday. Acknowledge before you open.\n\n• Bananas, 22 kr/kg (was 28)\n• Arla mellanmjölk 1.5 L, 2 for 24 kr\n• Salmon fillet, 149 kr/kg\n\nNew labels are in the back office. Old shelf labels come off before open."
     },
     {
-      "id": "orebro-evening",
-      "author": "maj",
-      "channel": "store-orebro",
-      "kind": "history",
-      "text": "Evening handover, Örebro. Bread came in late. No food-safety issues."
-    },
-    {
       "id": "orebro-price",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "store-orebro",
       "kind": "price-change",
       "text": "08:45 · Weekend prices, Saturday and Sunday. Acknowledge before you open.\n\n• Bananas, 22 kr/kg (was 28)\n• Arla mellanmjölk 1.5 L, 2 for 24 kr\n• Salmon fillet, 149 kr/kg\n\nNew labels are in the back office. Old shelf labels come off before open."
     },
     {
       "id": "region-preview",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "region-mitt",
       "kind": "history",
       "text": "Mitt region. The weekend price file goes to every store channel at 08:45. Acknowledge in the store channel before you open."
     },
     {
       "id": "region-gavle",
-      "author": "erik",
+      "author": "riley",
       "channel": "region-mitt",
       "kind": "acknowledgement",
       "text": "Gävle acknowledged the weekend price change."
     },
     {
       "id": "region-vasteras",
-      "author": "sara",
+      "author": "casey",
       "channel": "region-mitt",
       "kind": "acknowledgement",
       "text": "Västerås acknowledged the weekend price change."
     },
     {
       "id": "food-gavle",
-      "author": "erik",
+      "author": "riley",
       "channel": "food-safety",
       "kind": "history",
       "text": "Gävle, dairy case read 6°C at 07:10 yesterday. Back to 3°C by 07:40. Closed."
     },
     {
       "id": "food-vasteras",
-      "author": "sara",
+      "author": "casey",
       "channel": "food-safety",
       "kind": "history",
       "text": "Västerås, aisle 3, broken jar of pickled herring. Cleaned, no injury. Closed."
     },
     {
       "id": "announce-allergens",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "announcements",
       "kind": "announcement",
       "text": "Allergen counter cards are refreshed this month. The new cards are in each store office."
     },
     {
       "id": "announce-prices",
-      "author": "henrik",
+      "author": "jordan",
       "channel": "announcements",
       "kind": "announcement",
       "text": "Weekend prices are in every store channel as of 08:45. Acknowledge in your store channel before you open."
     },
     {
       "id": "onboarding-welcome",
-      "author": "astrid",
+      "author": "sam",
       "channel": "onboarding",
       "kind": "history",
       "text": "Start here. The canvas has the Uppsala contacts and the cold-chain and allergen rules. Then run Complete my induction."
-    },
-    {
-      "id": "onboarding-alva",
-      "author": "alva",
-      "channel": "onboarding",
-      "kind": "history",
-      "text": "Induction complete. Cold chain, allergens, and food-safety sign-off done."
     }
   ],
   "readyReplies": [
     {
-      "id": "astrid-move-stock",
-      "author": "astrid",
+      "id": "sam-move-stock",
+      "author": "sam",
       "channel": "food-safety",
-      "when": "After Linnea's fridge report lands, in that thread.",
+      "when": "After Alex's fridge report lands, in that thread.",
       "text": "Move all stock from fridge 3 to fridge 4 now. Confirm the fridge 4 reading in this thread. @facilities fridge 3 was at 9°C. Please log the call."
     },
     {
-      "id": "linnea-stock-moved",
-      "author": "linnea",
+      "id": "alex-stock-moved",
+      "author": "alex",
       "channel": "food-safety",
-      "when": "After Astrid's instruction. Keep this unsent until then. Attach a photo of the fridge 4 display at 3°C from Linnea's camera roll.",
+      "when": "After Sam's instruction. Keep this unsent until then. Attach a photo of the fridge 4 display at 3°C from Alex's camera roll.",
       "text": "Moved. Fridge 4 is at 3°C."
     },
     {
-      "id": "astrid-resolved",
-      "author": "astrid",
+      "id": "sam-resolved",
+      "author": "sam",
       "channel": "food-safety",
-      "when": "After Linnea's moved reply, in the same thread.",
+      "when": "After Alex's moved reply, in the same thread.",
       "text": "Resolved. Stock is in fridge 4 at 3°C. Facilities have the call on fridge 3."
     },
     {
-      "id": "henrik-nudge",
-      "author": "henrik",
+      "id": "jordan-nudge",
+      "author": "jordan",
       "channel": "region-mitt",
-      "when": "During Henrik's beat, after Uppsala has acknowledged and Sundsvall and Örebro have not.",
+      "when": "During Jordan's beat, after Uppsala has acknowledged and Sundsvall and Örebro have not.",
       "text": "Sundsvall and Örebro, the weekend prices still need an acknowledgement before you open. One tap in your store channel."
     }
   ],
   "slackbot": {
-    "who": "henrik",
+    "who": "jordan",
     "prompt": "Summarise this week's food-safety issues and shift handovers across the Mitt region."
   },
   "notInLiveDemo": [
@@ -494,15 +453,15 @@
   "limits": [
     "Frontline Members cannot use Slackbot, create canvases or lists, or start huddles.",
     "Frontline Members can run workflows and open content a Full Member shares in their channels.",
-    "Slackbot stays on Henrik's side.",
+    "Slackbot stays on Jordan's side.",
     "Do not show or claim QR sign-in, native shift scheduling, or off-shift blocking."
   ],
   "checks": [
-    "The Frontline add-on is on, and Linnea is a Frontline Member.",
-    "Acknowledge and the three bookmarked workflows work as Linnea on a phone.",
-    "Linnea can open the onboarding canvas on a phone.",
+    "The Frontline add-on is on, and Alex is a Frontline Member.",
+    "Acknowledge and the three bookmarked workflows work as Alex on a phone.",
+    "Alex can open the onboarding canvas on a phone.",
     "Beat 1 is pre-recorded as a fallback.",
-    "Astrid and Henrik use separate Chrome profiles, and phone mirroring has been tested."
+    "Sam and Jordan use separate Chrome profiles, and phone mirroring has been tested."
   ],
   "manualSteps": [
     {
@@ -513,27 +472,27 @@
     {
       "id": "slack-token",
       "title": "Store the org-admin Slack token",
-      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. Set SLACK_PLUS_EMAIL to the inbox that should receive every invite, and the seeder invites each person as that address with a plus tag. Persona tokens use SLACK_TOKEN_LINNEA, SLACK_TOKEN_ASTRID, SLACK_TOKEN_HENRIK, and the same pattern for Johan, Erik, Sara, Nils, Maj, and Alva. The agent uses them to create the workspace and post the staged lines. Keep them out of git. Skip a token when it is already stored."
+      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. The shared cast is Alex, Sam, Jordan, Riley, Casey, and Jamie. Persona tokens use SLACK_TOKEN_ALEX, SLACK_TOKEN_SAM, SLACK_TOKEN_JORDAN, SLACK_TOKEN_RILEY, SLACK_TOKEN_CASEY, and SLACK_TOKEN_JAMIE. Reuse these users for later demos. Keep the tokens out of git."
     },
     {
       "id": "frontline-accounts",
-      "title": "Make Linnea a Frontline Member",
-      "detail": "Turn on the Frontline add-on. Linnea is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and she is out of #general and #random. Astrid and Henrik are Full Members. Henrik is in every store channel. Every other speaker is a Full Member too. Create an @facilities user group. Use separate Chrome profiles for Astrid and Henrik, and test phone mirroring for Linnea. Do this before the webinar. The live demo does not include an admin invite."
+      "title": "Make Alex a Frontline Member",
+      "detail": "Turn on the Frontline add-on. Alex is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and they are out of #general and #random. Sam and Jordan are Full Members. Jordan is in every store channel. Riley, Casey, and Jamie are Full Members too. Create an @facilities user group. Use separate Chrome profiles for Sam and Jordan, and test phone mirroring for Alex. Do this before the webinar. The live demo does not include an admin invite."
     },
     {
       "id": "workflows",
       "title": "Build the workflows and test them on a phone",
-      "detail": "In Workflow Builder, create Complete my induction, Report an issue, and End-of-shift handover from the forms in the plan, and bookmark each one in its channel. Create Acknowledge as a one-tap workflow and put that link on the price-change button. Test all four as Linnea on a phone, and open the onboarding canvas on that phone. Then re-run the seed so the bookmarks and the button use those links."
+      "detail": "In Workflow Builder, create Complete my induction, Report an issue, and End-of-shift handover from the forms in the plan, and bookmark each one in its channel. Create Acknowledge as a one-tap workflow and put that link on the price-change button. Test all four as Alex on a phone, and open the onboarding canvas on that phone. Then re-run the seed so the bookmarks and the button use those links."
     },
     {
       "id": "stage-personas",
       "title": "Post any staged lines the tokens did not send",
-      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Linnea's fridge 4 reply unsent until Astrid has replied in the thread. Put the fridge 4 photo in Linnea's camera roll before the webinar."
+      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Alex's fridge 4 reply unsent until Sam has replied in the thread. Put the fridge 4 photo in Alex's camera roll before the webinar."
     },
     {
       "id": "fallback-recording",
-      "title": "Pre-record Linnea's beat",
-      "detail": "Record Beat 1 on the phone as a fallback before the webinar. The live path is still Linnea in Slack, with no huddle."
+      "title": "Pre-record Alex's beat",
+      "detail": "Record Beat 1 on the phone as a fallback before the webinar. The live path is still Alex in Slack, with no huddle."
     }
   ],
   "agentSteps": [
@@ -550,17 +509,17 @@
     {
       "id": "channels",
       "title": "Create the channels",
-      "detail": "Create 9 channels with admin.conversations.create in the new workspace. Linnea's home is store-uppsala, region-mitt, food-safety, announcements, onboarding. She is not a member of the other store channels."
+      "detail": "Create 9 channels with admin.conversations.create in the new workspace. Alex's home is store-uppsala, region-mitt, food-safety, announcements, onboarding. They are not a member of the other store channels."
     },
     {
       "id": "canvas",
-      "title": "Add Astrid's onboarding canvas",
-      "detail": "Create the canvas \"Uppsala store guide\" with canvases.create as Astrid, tabbed into #onboarding. Frontline Members can open a canvas a Full Member shares. They do not create one."
+      "title": "Add Sam's onboarding canvas",
+      "detail": "Create the canvas \"Uppsala store guide\" with canvases.create as Sam, tabbed into #onboarding. Frontline Members can open a canvas a Full Member shares. They do not create one."
     },
     {
       "id": "stage-history",
       "title": "Post the staged history",
-      "detail": "Post each staged message with that person's user token. Thread the store acknowledgements under Henrik's price-change message. Leave Linnea's moved reply unsent."
+      "detail": "Post each staged message with that person's user token. Thread the store acknowledgements under Jordan's price-change message. Leave Alex's moved reply unsent."
     },
     {
       "id": "bookmarks",
@@ -575,7 +534,7 @@
     {
       "id": "handoff",
       "title": "Hand off the live demo",
-      "detail": "Stop here. Norrhem Livs opens with Linnea already in Slack. Do not run an admin invite on stage, and do not start a huddle."
+      "detail": "Stop here. Norrhem Livs opens with Alex already in Slack. Do not run an admin invite on stage, and do not start a huddle."
     }
   ],
   "talkTrack": [
@@ -597,7 +556,7 @@
     {
       "label": "Beat 4",
       "show": "Report an issue",
-      "say": "That's now with Astrid and facilities."
+      "say": "That's now with Sam and facilities."
     },
     {
       "label": "Beat 5",
@@ -606,7 +565,7 @@
     },
     {
       "label": "Switch",
-      "show": "Astrid on desktop",
+      "show": "Sam on desktop",
       "say": "Now let's see what that looks like for her store manager."
     },
     {
@@ -616,8 +575,8 @@
     },
     {
       "label": "Switch",
-      "show": "Henrik on desktop",
-      "say": "And at HQ, with 40 stores, Henrik needs the bigger picture."
+      "show": "Jordan on desktop",
+      "say": "And at HQ, with 40 stores, Jordan needs the bigger picture."
     },
     {
       "label": "Beat 7",

@@ -1,6 +1,6 @@
 # Frontline demo for Slack
 
-Norrhem Livs is a fictional Nordic grocery chain. This repository stages the Slack Frontline webinar in a new Enterprise Grid workspace: Linnea on a phone, Astrid on desktop, then Henrik at HQ.
+Norrhem Livs is a fictional Nordic grocery chain. This repository stages the Slack Frontline webinar in a new Enterprise Grid workspace: Alex on a phone, Sam on desktop, then Jordan at HQ. Alex, Sam, Jordan, Riley, Casey, and Jamie are the only Slack users this sandbox should add. Later demos reuse them.
 
 There is no Salesforce step. The Slack app in [`slack/manifest.json`](slack/manifest.json) creates the workspace and posts the staged script. People do not message the app. The procedure is [`AGENT.md`](AGENT.md).
 
@@ -26,7 +26,7 @@ The app has no slash command and no conversation. Reinstall it after any manifes
 
 ### 2. Store the tokens
 
-Keep `SLACK_ADMIN_TOKEN` in the coding agent's secret store. Set `SLACK_PLUS_EMAIL` to the inbox that should receive the invites. The seeder creates one Full Member per person on that address, using a plus tag (`you+linnea@…`, `you+astrid@…`). Persona tokens are `SLACK_TOKEN_ASTRID`, `SLACK_TOKEN_HENRIK`, `SLACK_TOKEN_LINNEA`, and the same pattern for the other people named in the plan. Do not commit them.
+Keep `SLACK_ADMIN_TOKEN` in the coding agent's secret store. Persona tokens are `SLACK_TOKEN_ALEX`, `SLACK_TOKEN_SAM`, `SLACK_TOKEN_JORDAN`, `SLACK_TOKEN_RILEY`, `SLACK_TOKEN_CASEY`, and `SLACK_TOKEN_JAMIE`. Do not commit them. Do not create a new Slack user for another demo.
 
 ### 3. Give the agent this story
 
@@ -34,14 +34,14 @@ Keep `SLACK_ADMIN_TOKEN` in the coding agent's secret store. Set `SLACK_PLUS_EMA
 Follow AGENT.md in this repository.
 ```
 
-The agent creates a workspace named Norrhem Livs, invites every speaker as a real user, adds the channels, tabs Astrid's canvas into `#onboarding`, and posts the staged history as each person whose token it has. It then stops on the gates that are still open.
+The agent creates a workspace named Norrhem Livs, adds the channels, tabs Sam's canvas into `#onboarding`, and posts the staged history as each person whose token it has. It then stops on the gates that are still open.
 
 ### 4. Finish the gates before you present
 
-- Linnea is a Frontline Member on her five channels. Astrid, Henrik, and every other speaker are Full Members.
-- The three workflows are bookmarked, and Acknowledge is a button on Henrik's 08:45 price change.
-- Linnea's fridge 4 reply stays unsent until Astrid has replied.
-- Beat 1 is recorded as a fallback. Phone mirroring is tested. Astrid and Henrik have separate Chrome profiles.
+- Alex is a Frontline Member on their five channels. Sam, Jordan, Riley, Casey, and Jamie are Full Members.
+- The three workflows are bookmarked, and Acknowledge is a button on Jordan's 08:45 price change.
+- Alex's fridge 4 reply stays unsent until Sam has replied.
+- Beat 1 is recorded as a fallback. Phone mirroring is tested. Sam and Jordan have separate Chrome profiles.
 
 The live demo does not include a huddle or an admin invite.
 
@@ -62,7 +62,7 @@ The dry-run prints the workspace, the Slack calls, the talk track, and the live 
 
 - Installing the workspace app on the Enterprise Grid org and granting it to future workspaces.
 - Storing the org-admin token and any persona tokens.
-- Turning Linnea into a Frontline Member and assigning her five channels.
+- Turning Alex into a Frontline Member and assigning their five channels.
 - Building the four workflows in Workflow Builder and testing them on a phone.
 - Pasting any staged line whose persona token was missing.
 - Recording Beat 1 as a fallback.

@@ -10,4 +10,4 @@ description: >-
 
 Follow `AGENT.md` at the root of this repository. That file is the procedure.
 
-The brief is Norrhem Livs. Do not invent a Salesforce record, and do not reuse a workspace that already existed.
+The brief is Norrhem Livs. The Slack users are the six people in `scripts/cast.mjs`. Do not invent a Salesforce record, do not reuse a workspace that already existed, and do not create a Slack user outside that pool.

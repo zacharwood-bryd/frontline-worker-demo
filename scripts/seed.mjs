@@ -261,8 +261,8 @@ export function formatDryRun(plan, result) {
     `${plan.slack.workspaceName} (${plan.slack.workspaceDomain})`,
     plan.useCase,
     "",
-    "Linnea's channels:",
-    ...plan.linneaChannels.map((name) => `- #${name}`),
+    `${plan.cast.find((person) => person.part === "frontline")?.name || "Frontline"}'s channels:`,
+    ...plan.frontlineChannels.map((name) => `- #${name}`),
     "",
     "Slack calls:",
   ];

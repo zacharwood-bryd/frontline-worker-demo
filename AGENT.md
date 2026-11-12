@@ -1,6 +1,6 @@
 # Frontline demo
 
-You are the coding agent. The story is fixed: Norrhem Livs, a fictional Nordic grocery chain, in a new Slack Enterprise Grid workspace. Zac presents it. Linnea is the store associate, Astrid is the store manager, and Henrik is regional ops. Johan, Erik, Sara, Nils, Maj, and Alva are the other speakers. Every speaker is a real Slack user.
+You are the coding agent. The story for this demo is Norrhem Livs, a fictional Nordic grocery chain, in a new Slack Enterprise Grid workspace. Zac presents it. The Slack users are the shared pool in `scripts/cast.mjs`: Alex, Sam, Jordan, Riley, Casey, and Jamie. In this demo Alex is the store associate, Sam is the store manager, and Jordan is regional ops. Riley, Casey, and Jamie are the other stores. A later demo reuses these six accounts and assigns them different roles. Do not create another Slack user.
 
 This demo is Slack only. You do not create Salesforce records, and you do not connect Slack to Salesforce.
 
@@ -34,20 +34,19 @@ node scripts/seed.mjs
 
 1. Confirm the workspace app is installed on the Enterprise Grid org and granted to future workspaces. If it is not, print the `install-slack-app` gate and stop.
 2. You need `SLACK_ADMIN_TOKEN` in the environment, the org-admin user token from the manifest install. That token creates the workspace, invites users, and stages the channels. If it is missing, print the `slack-token` gate and stop. Reinstall the app when `slack/manifest.json` gains scopes, then store the new token.
-3. When `SLACK_PLUS_EMAIL` is set, invite every person in the cast and the other speakers with `admin.users.invite` on that workspace. The address is the local part, a plus tag of the person id, and the same domain. They are Full Members, not guests. Linnea is later switched to a Frontline Member by hand.
-4. Persona lines post as that person. `SLACK_TOKEN_ASTRID` creates the canvas. `SLACK_TOKEN_HENRIK`, `SLACK_TOKEN_ERIK`, and the other names in the gate post their own lines. If a persona token is missing, leave that line in the pending list and print the `stage-personas` gate. Do not post those lines as someone else, and do not fake a speaker with `chat:write.customize`.
+3. The sandbox is at its user cap. Invite only the six people in `scripts/cast.mjs`, and only if those accounts do not already exist. They are Full Members, not guests. Alex is later switched to a Frontline Member by hand.
+4. Persona lines post as that person. `SLACK_TOKEN_SAM` creates the canvas. `SLACK_TOKEN_JORDAN`, `SLACK_TOKEN_RILEY`, and the other names in the gate post their own lines. If a persona token is missing, leave that line in the pending list and print the `stage-personas` gate. Do not post those lines as someone else, and do not fake a speaker with `chat:write.customize`.
 
 ## New workspace
 
 The plan names the workspace Norrhem Livs and sets `team_domain` to `norrhem-livs`.
 
 1. `admin.teams.create` with `team_name` and `team_domain` from the plan. Save the returned team id.
-2. `admin.conversations.create` for every channel, with that team id. Linnea's five channels are `#store-uppsala`, `#region-mitt`, `#food-safety`, `#announcements`, and `#onboarding`.
-3. `admin.users.invite` for every speaker when `SLACK_PLUS_EMAIL` is set. Each invite uses that inbox with a plus tag and the channels listed on that person.
-4. `canvases.create` as Astrid, tabbed into `#onboarding`.
-5. `chat.postMessage` for each staged message, as the author on that message. Thread Gävle and Västerås acknowledgements under Henrik's price-change message in that store channel.
-6. Leave the ready replies unsent. Linnea's "Moved. Fridge 4 is at 3°C." waits until Astrid has replied in the fridge thread.
-7. Bookmark the three workflows when their links are in the brief. Acknowledge is a button on the price-change message, not a bookmark.
+2. `admin.conversations.create` for every channel, with that team id. Alex's five channels are `#store-uppsala`, `#region-mitt`, `#food-safety`, `#announcements`, and `#onboarding`.
+3. `canvases.create` as Sam, tabbed into `#onboarding`.
+4. `chat.postMessage` for each staged message, as the author on that message. Thread Gävle and Västerås acknowledgements under Jordan's price-change message in that store channel.
+5. Leave the ready replies unsent. Alex's "Moved. Fridge 4 is at 3°C." waits until Sam has replied in the fridge thread.
+6. Bookmark the three workflows when their links are in the brief. Acknowledge is a button on the price-change message, not a bookmark.
 
 If a call returns `not_in_channel`, `channel_not_found`, or `no_local_user_on_team`, the person is not in that new workspace yet. Add them to the workspace and the channel, then run the seed again. The links file keeps the workspace id.
 
@@ -61,7 +60,7 @@ The command writes `demos/norrhem-livs.links.json`. That file is gitignored. A s
 
 ## What stays manual
 
-Frontline membership, the five-channel assignment, the `@facilities` group, Workflow Builder, phone mirroring, and the Beat 1 fallback recording are gates. Print any gate that is still open. The live demo starts with Linnea already in Slack.
+Frontline membership, the five-channel assignment, the `@facilities` group, Workflow Builder, phone mirroring, and the Beat 1 fallback recording are gates. Print any gate that is still open. The live demo starts with Alex already in Slack.
 
 ## Save
 
@@ -77,6 +76,7 @@ Frontline membership, the five-channel assignment, the `@facilities` group, Work
 - Start a huddle, or run an admin invite, during the demo.
 - Show or claim QR sign-in, native shift scheduling, or off-shift blocking.
 - Put a token, a workspace id, or a message timestamp into a committed file.
-- Give Linnea more than 10 channels, or put her in the other store channels.
-- Let Linnea use Slackbot. The summary is Henrik's.
+- Give Alex more than 10 channels, or put them in the other store channels.
+- Let Alex use Slackbot. The summary is Jordan's.
 - Invent a speaker with a custom username. Every line comes from that person's user account.
+- Create a Slack user who is not in `scripts/cast.mjs`.
