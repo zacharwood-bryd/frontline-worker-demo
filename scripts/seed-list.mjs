@@ -33,8 +33,9 @@ function richText(value) {
 }
 
 async function main() {
-  const token = process.env.SLACK_ADMIN_TOKEN;
-  if (!token) throw new Error("SLACK_ADMIN_TOKEN is missing.");
+  const token = process.env.SLACK_BOT_TOKEN || process.env.SLACK_ADMIN_TOKEN;
+  if (!token) throw new Error("SLACK_BOT_TOKEN or SLACK_ADMIN_TOKEN is missing.");
+  console.log("token", process.env.SLACK_BOT_TOKEN ? "bot" : "admin");
   const links = JSON.parse(readFileSync(linksPath, "utf8"));
   const list = NORTHPEAK_INPUT.list;
   const keys = ["name", "start", "guide", "till", "buddy", "status"];
@@ -50,7 +51,10 @@ async function main() {
         is_primary_column: index === 0,
       })),
     });
-    if (!created.ok) throw new Error(`slackLists.create failed: ${created.error}`);
+    if (!created.ok) {
+      const scopes = [created.needed, created.provided].filter(Boolean).join(" | provided ");
+      throw new Error(`slackLists.create failed: ${created.error}${scopes ? ` | needed ${scopes}` : ""}`);
+    }
     listId = created.list_id;
     const columns = Object.fromEntries((created.list_metadata?.schema || []).map((column) => [column.key, column.id]));
     for (const row of list.rows) {

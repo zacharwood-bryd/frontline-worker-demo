@@ -55,7 +55,7 @@ node scripts/seed.mjs --apply
 node scripts/seed-list.mjs
 ```
 
-The dry-run prints the workspace, the Slack calls, the talk track, and the live lines. `--apply` calls Slack and writes `demos/northpeak-outdoor.links.json`, which is gitignored. `seed-list.mjs` creates the New starters list once the admin token has `lists:write`, shares it into `#stockholm-leads`, and makes Sam the owner.
+The dry-run prints the workspace, the Slack calls, the talk track, and the live lines. `--apply` calls Slack and writes `demos/northpeak-outdoor.links.json`, which is gitignored. `seed-list.mjs` creates the New starters list with `SLACK_BOT_TOKEN` (the bot token Slack grants `lists:write`), shares it into `#stockholm-leads`, and makes Sam the owner.
 
 [demos/northpeak-outdoor.json](demos/northpeak-outdoor.json) is the plan the tests lock to the brief. It is fictional.
 
