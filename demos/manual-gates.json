@@ -13,17 +13,17 @@
     {
       "id": "frontline-accounts",
       "title": "Make Alex a Frontline Member",
-      "detail": "Turn on the Frontline add-on. Alex is a Frontline Member with exactly #store-uppsala, #region-mitt, #food-safety, #announcements, and #onboarding, and they are out of #general and #random. Sam and Jordan are Full Members. Jordan is in every store channel. Riley, Casey, and Jamie are Full Members too. Create an @facilities user group. Use separate Chrome profiles for Sam and Jordan, and test phone mirroring for Alex. Do this before the webinar. The live demo does not include an admin invite."
+      "detail": "Turn on the Frontline add-on. Alex is a Frontline Member with exactly #onboarding-alex, #store-stockholm, and #announcements, and they are out of #general and #random. Sam and Jordan are Full Members. Riley, Casey, and Jamie are the Gothenburg, Oslo, and Copenhagen managers. Use separate Chrome profiles for Sam and Jordan, and test phone mirroring for Alex. Do this before the webinar. The live demo does not include an admin invite."
     },
     {
       "id": "workflows",
       "title": "Build the workflows and test them on a phone",
-      "detail": "In Workflow Builder, create Complete my induction, Report an issue, and End-of-shift handover from the forms in the plan, and bookmark each one in its channel. Create Acknowledge as a one-tap workflow and put that link on the price-change button. Test all four as Alex on a phone, and open the onboarding canvas on that phone. Then re-run the seed so the bookmarks and the button use those links."
+      "detail": "In Workflow Builder, create I've read the guide in #onboarding-alex and Report low stock in every store channel. I've read the guide ticks Alex's row on the New starters List. Report low stock posts in the store channel and in #nordics-stock-requests, which Alex is not in. Test both as Alex on a phone, including a photo from the camera roll, and open the Stockholm store guide on that phone. Then bookmark them."
     },
     {
       "id": "stage-personas",
       "title": "Post any staged lines the tokens did not send",
-      "detail": "Each staged message is posted as that person. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Alex's fridge 4 reply unsent until Sam has replied in the thread. Put the fridge 4 photo in Alex's camera roll before the webinar."
+      "detail": "Each staged message is posted as that person. Weekly reports post as Jordan until a bot token can send them as Northpeak Reports. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Jordan's transfer reply unsent until Alex has raised the low stock. Put a photo of a near-empty rail in Alex's camera roll before the webinar."
     },
     {
       "id": "fallback-recording",

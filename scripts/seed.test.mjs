@@ -2,12 +2,12 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { NORRHEM_INPUT, buildPlan } from "./plan.mjs";
+import { NORTHPEAK_INPUT, buildPlan } from "./plan.mjs";
 import { formatDryRun, plusAddress, runSeed, seedCalls, tokenName } from "./seed.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const catalog = JSON.parse(readFileSync(path.join(root, "demos/manual-gates.json"), "utf8"));
-const plan = buildPlan(NORRHEM_INPUT, catalog);
+const plan = buildPlan(NORTHPEAK_INPUT, catalog);
 const calls = seedCalls(plan);
 const allowed = new Set([
   "admin.teams.create",
@@ -32,18 +32,19 @@ assert.equal(
   calls.some((call) => call.method === "chat.postMessage" && String(call.body.text).includes("Fridge 4 is at 3°C")),
   false,
 );
-assert.equal(calls.find((call) => call.id === "gavle-ack").body.thread_ts, "{{ts:gavle-price}}");
+assert.equal(calls.find((call) => call.id === "gothenburg-after").body.thread_ts, "{{ts:gothenburg-promo}}");
 assert.equal(tokenName("admin"), "SLACK_ADMIN_TOKEN");
 assert.equal(tokenName("alex"), "SLACK_TOKEN_ALEX");
 
 const dry = await runSeed({ plan, env: {}, apply: false, fetch: () => { throw new Error("dry-run called Slack"); } });
 assert.equal(dry.mode, "dry-run");
-assert.match(formatDryRun(plan, dry), /Norrhem Livs \(norrhem-livs\)/);
+assert.match(formatDryRun(plan, dry), /Northpeak Outdoor \(northpeak-outdoor\)/);
 const sheet = formatDryRun(plan, dry);
 assert.match(sheet, /Live lines, not seeded:/);
-assert.match(sheet, /Acknowledged\. New labels are up\./);
-assert.match(sheet, /08:45 · Weekend prices/);
-assert.match(formatDryRun(plan, dry), /Moved\. Fridge 4 is at 3°C/);
+assert.match(sheet, /Welcome to Northpeak, Alex/);
+assert.match(sheet, /30% off/);
+assert.match(sheet, /transferring from Copenhagen/);
+assert.match(sheet, /Northpeak Reports/);
 
 const blocked = await runSeed({
   plan,
@@ -82,9 +83,16 @@ const partial = await runSeed({
   writeLinks: (state) => writes.push(structuredClone(state)),
 });
 assert.equal(partial.mode, "applied");
-assert.deepEqual(adminOnly.map((call) => call.method), ["admin.teams.create", ...plan.channels.map(() => "admin.conversations.create")]);
+assert.deepEqual(adminOnly.map((call) => call.method), [
+  "admin.teams.create",
+  ...plan.channels.map(() => "admin.conversations.create"),
+]);
+assert.equal(adminOnly.some((call) => call.method === "chat.postMessage"), false);
+for (const message of plan.stagedMessages.filter((item) => item.postAs)) {
+  assert.equal(partial.pending.find((item) => item.id === message.id).token, "SLACK_TOKEN_JORDAN");
+}
 assert.equal(partial.links.teamId, "T1");
-assert.equal(partial.links.channels["store-uppsala"], "C_store-uppsala");
+assert.equal(partial.links.channels["store-stockholm"], "C_store-stockholm");
 assert.equal(partial.links.canvasId, null);
 assert.ok(partial.pending.some((item) => item.id === "canvas" && item.token === "SLACK_TOKEN_SAM"));
 assert.equal(JSON.stringify(partial.links).includes("xoxp-admin"), false);
@@ -105,13 +113,16 @@ assert.equal(applied.pending.length, 0);
 assert.equal(applied.links.canvasId, "F1");
 const canvasCall = sent.find((call) => call.method === "canvases.create");
 assert.equal(canvasCall.authorization, "Bearer xoxp-sam");
-assert.equal(canvasCall.body.channel_id, "C_onboarding");
+assert.equal(canvasCall.body.channel_id, "C_onboarding-alex");
 assert.equal(canvasCall.body.document_content.type, "markdown");
-const gavlePrice = sent.find((call) => call.method === "chat.postMessage" && call.body.text.startsWith("08:45") && call.body.channel === "C_store-gavle");
-const gavleAck = sent.find((call) => call.method === "chat.postMessage" && call.body.text === "Acknowledged. New labels are up.");
-assert.equal(gavleAck.authorization, "Bearer xoxp-riley");
-assert.equal(gavleAck.body.thread_ts, gavlePrice.ts || applied.links.messages["gavle-price"]);
-assert.equal(gavleAck.body.thread_ts, applied.links.messages["gavle-price"]);
+const gothenburgPromo = sent.find((call) => call.method === "chat.postMessage" && call.body.channel === "C_store-gothenburg" && call.body.text.includes("30% off"));
+const gothenburgAfter = sent.find((call) => call.method === "chat.postMessage" && call.body.text === "Rails are dressed. We're already light on M.");
+assert.equal(gothenburgAfter.authorization, "Bearer xoxp-riley");
+assert.equal(gothenburgAfter.body.thread_ts, applied.links.messages["gothenburg-promo"]);
+assert.equal(gothenburgPromo.body.channel, "C_store-gothenburg");
+const reportAsJordan = sent.find((call) => call.method === "chat.postMessage" && call.body.text.includes("Weekly report, last week: Stockholm"));
+assert.equal(reportAsJordan.authorization, "Bearer xoxp-jordan");
+assert.equal(reportAsJordan.body.username, undefined);
 assert.equal(sent.some((call) => JSON.stringify(call.body).includes("xoxp-")), false);
 
 const again = [];
@@ -150,7 +161,7 @@ const withPlus = await runSeed({
     teamId: "T1",
     channels: Object.fromEntries(plan.channels.map((channel) => [channel.name, `C_${channel.name}`])),
     messages: {},
-    posted: [],
+    posted: plan.stagedMessages.filter((message) => message.postAs).map((message) => message.id),
     bookmarks: {},
     invites: {},
   },
@@ -168,8 +179,8 @@ const withPlus = await runSeed({
 });
 assert.equal(invited.length, 6);
 assert.equal(invited.every((call) => call.method === "admin.users.invite"), true);
-assert.equal(invited.find((call) => call.body.email === "owner+alex@example.com").body.channel_ids.split(",").length, 5);
-assert.equal(invited.find((call) => call.body.email === "owner+jordan@example.com").body.channel_ids.split(",").length, 9);
+assert.equal(invited.find((call) => call.body.email === "owner+alex@example.com").body.channel_ids.split(",").length, 3);
+assert.equal(invited.find((call) => call.body.email === "owner+jordan@example.com").body.channel_ids.split(",").length, 8);
 assert.equal(invited.find((call) => call.body.real_name === "Sam").body.email, "owner+sam@example.com");
 assert.equal(withPlus.links.invites.sam.ok, true);
 assert.equal(withPlus.links.invites.jamie.ok, true);

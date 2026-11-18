@@ -6,12 +6,13 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { buildPlan, NORRHEM_INPUT } from "./plan.mjs";
+import { buildPlan, NORTHPEAK_INPUT } from "./plan.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
 export function tokenName(personId) {
   if (personId === "admin") return "SLACK_ADMIN_TOKEN";
+  if (personId === "bot") return "SLACK_BOT_TOKEN";
   return `SLACK_TOKEN_${String(personId).toUpperCase()}`;
 }
 
@@ -39,7 +40,7 @@ export function inviteCalls(plan, baseEmail) {
 }
 
 export function callsFor(plan, env = {}) {
-  const calls = seedCalls(plan);
+  const calls = seedCalls(plan, env);
   if (!env.SLACK_PLUS_EMAIL) return calls;
   const invites = inviteCalls(plan, env.SLACK_PLUS_EMAIL);
   const canvasAt = calls.findIndex((call) => call.id === "canvas");
@@ -47,7 +48,7 @@ export function callsFor(plan, env = {}) {
   return [...calls.slice(0, index), ...invites, ...calls.slice(index)];
 }
 
-export function seedCalls(plan) {
+export function seedCalls(plan, env = {}) {
   const calls = [
     {
       id: "workspace",
@@ -69,7 +70,7 @@ export function seedCalls(plan) {
       token: "admin",
       body: {
         name: channel.name,
-        is_private: false,
+        is_private: Boolean(channel.isPrivate),
         description: channel.purpose,
         team_id: "{{team}}",
       },
@@ -94,10 +95,16 @@ export function seedCalls(plan) {
     };
     if (message.blocks) body.blocks = message.blocks;
     if (message.thread) body.thread_ts = `{{ts:${message.thread}}}`;
+    let token = message.author;
+    if (message.postAs && env.SLACK_BOT_TOKEN) {
+      body.username = message.postAs;
+      body.icon_emoji = ":bar_chart:";
+      token = "bot";
+    }
     calls.push({
       id: message.id,
       method: "chat.postMessage",
-      token: message.author,
+      token,
       kind: message.kind,
       body,
     });
@@ -280,7 +287,8 @@ export function formatDryRun(plan, result) {
     lines.push(`# ${author}`);
     for (const message of messages) {
       const thread = message.thread ? ` (thread on ${message.thread})` : "";
-      lines.push(`- #${message.channel}${thread}`);
+      const persona = message.postAs ? ` as ${message.postAs}` : "";
+      lines.push(`- #${message.channel}${thread}${persona}`);
       lines.push(message.text);
     }
   }
@@ -292,8 +300,10 @@ export function formatDryRun(plan, result) {
   for (const reply of plan.readyReplies) {
     lines.push(`- ${reply.author} in #${reply.channel}: ${reply.text}`);
   }
-  if (plan.slackbot) {
-    lines.push("", `Slackbot, typed by ${plan.slackbot.who}: ${plan.slackbot.prompt}`);
+  const prompts = plan.slackbot?.prompts || (plan.slackbot ? [plan.slackbot] : []);
+  if (prompts.length) {
+    lines.push("", "Slackbot, not seeded:");
+    for (const item of prompts) lines.push(`- ${item.who}: ${item.prompt}`);
   }
   lines.push("", "Still manual:");
   for (const step of plan.manualSteps) {
@@ -304,7 +314,7 @@ export function formatDryRun(plan, result) {
 
 async function main() {
   const catalog = JSON.parse(readFileSync(path.join(root, "demos/manual-gates.json"), "utf8"));
-  const plan = buildPlan(NORRHEM_INPUT, catalog);
+  const plan = buildPlan(NORTHPEAK_INPUT, catalog);
   const apply = process.argv.includes("--apply");
   const linksPath = path.join(root, "demos", `${plan.id}.links.json`);
   let links = null;

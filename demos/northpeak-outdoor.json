@@ -1,0 +1,729 @@
+{
+  "id": "northpeak-outdoor",
+  "title": "Northpeak Outdoor",
+  "industry": "Sports and outdoor retail",
+  "company": "Northpeak Outdoor",
+  "useCase": "A seasonal associate, her store manager, and regional ops handle a Black Friday jacket shortage in Slack.",
+  "beats": [
+    "Alex opens Slack on their phone. Their home has three channels.",
+    "In #onboarding-alex they read Sam's welcome, open the store guide, and run I've read the guide.",
+    "In #store-stockholm they open Jordan's Black Friday post.",
+    "They run Report low stock for the Trailhead jacket, sizes M and L, backroom empty, eight customers, and a photo.",
+    "Sam opens the New starters List in #stockholm-leads. Alex's sign-off is Done. Taylor and Noah are Chase.",
+    "Sam asks Slackbot how Stockholm did last week and what to watch.",
+    "Jordan opens #nordics-stock-requests. Stockholm sits with Oslo and Gothenburg.",
+    "Jordan asks Slackbot where the surplus is, then replies on Alex's post that 20 jackets are transferring from Copenhagen."
+  ],
+  "cast": [
+    {
+      "id": "alex",
+      "name": "Alex",
+      "role": "Seasonal sales associate, Stockholm",
+      "title": "Sales Associate, Stockholm",
+      "part": "frontline",
+      "account": "Frontline Member",
+      "device": "Phone",
+      "channels": [
+        "onboarding-alex",
+        "store-stockholm",
+        "announcements"
+      ]
+    },
+    {
+      "id": "sam",
+      "name": "Sam",
+      "role": "Store manager, Stockholm",
+      "title": "Store Manager, Stockholm",
+      "part": "manager",
+      "account": "Full Member",
+      "device": "Desktop",
+      "channels": [
+        "onboarding-alex",
+        "store-stockholm",
+        "announcements",
+        "stockholm-leads",
+        "nordics-stock-requests",
+        "nordics-store-reports"
+      ]
+    },
+    {
+      "id": "jordan",
+      "name": "Jordan",
+      "role": "Regional ops, Nordics",
+      "title": "Regional Ops, Nordics",
+      "part": "hq",
+      "account": "Full Member",
+      "device": "Desktop",
+      "channels": [
+        "store-stockholm",
+        "store-gothenburg",
+        "store-oslo",
+        "store-copenhagen",
+        "store-helsinki",
+        "announcements",
+        "nordics-stock-requests",
+        "nordics-store-reports"
+      ]
+    }
+  ],
+  "people": [
+    {
+      "id": "riley",
+      "name": "Riley",
+      "role": "Store manager, Gothenburg",
+      "title": "Store Manager, Gothenburg",
+      "account": "Full Member",
+      "channels": [
+        "store-gothenburg",
+        "nordics-stock-requests",
+        "nordics-store-reports"
+      ]
+    },
+    {
+      "id": "casey",
+      "name": "Casey",
+      "role": "Store manager, Oslo",
+      "title": "Store Manager, Oslo",
+      "account": "Full Member",
+      "channels": [
+        "store-oslo",
+        "nordics-stock-requests",
+        "nordics-store-reports"
+      ]
+    },
+    {
+      "id": "jamie",
+      "name": "Jamie",
+      "role": "Store manager, Copenhagen",
+      "title": "Store Manager, Copenhagen",
+      "account": "Full Member",
+      "channels": [
+        "store-copenhagen",
+        "nordics-stock-requests",
+        "nordics-store-reports"
+      ]
+    }
+  ],
+  "channels": [
+    {
+      "name": "onboarding-alex",
+      "purpose": "Alex's personal onboarding. The Stockholm store guide is the channel canvas.",
+      "frontline": true
+    },
+    {
+      "name": "store-stockholm",
+      "purpose": "Stockholm floor, the Black Friday promo, and Report low stock.",
+      "frontline": true,
+      "store": "Stockholm"
+    },
+    {
+      "name": "announcements",
+      "purpose": "Company-wide news.",
+      "frontline": true
+    },
+    {
+      "name": "stockholm-leads",
+      "purpose": "Stockholm leadership. The New starters List is the channel tab.",
+      "isPrivate": true
+    },
+    {
+      "name": "store-gothenburg",
+      "purpose": "Gothenburg floor.",
+      "store": "Gothenburg"
+    },
+    {
+      "name": "store-oslo",
+      "purpose": "Oslo floor.",
+      "store": "Oslo"
+    },
+    {
+      "name": "store-copenhagen",
+      "purpose": "Copenhagen floor. This store has surplus Trailhead jackets.",
+      "store": "Copenhagen"
+    },
+    {
+      "name": "store-helsinki",
+      "purpose": "Helsinki floor.",
+      "store": "Helsinki"
+    },
+    {
+      "name": "nordics-stock-requests",
+      "purpose": "Low-stock requests for regional ops. Alex is not a member."
+    },
+    {
+      "name": "nordics-store-reports",
+      "purpose": "Weekly performance and this morning's promo stock position."
+    }
+  ],
+  "frontlineChannels": [
+    "onboarding-alex",
+    "store-stockholm",
+    "announcements"
+  ],
+  "storyScale": {
+    "storesInTheChain": 60,
+    "storesSeeded": 5
+  },
+  "slack": {
+    "mode": "workspace",
+    "workspaceName": "Northpeak Outdoor",
+    "workspaceDomain": "northpeak-outdoor",
+    "story": "Northpeak Outdoor\nA seasonal associate, her store manager, and regional ops handle a Black Friday jacket shortage in Slack.\n1. Alex opens Slack on their phone. Their home has three channels.\n2. In #onboarding-alex they read Sam's welcome, open the store guide, and run I've read the guide.\n3. In #store-stockholm they open Jordan's Black Friday post.\n4. They run Report low stock for the Trailhead jacket, sizes M and L, backroom empty, eight customers, and a photo.\n5. Sam opens the New starters List in #stockholm-leads. Alex's sign-off is Done. Taylor and Noah are Chase.\n6. Sam asks Slackbot how Stockholm did last week and what to watch.\n7. Jordan opens #nordics-stock-requests. Stockholm sits with Oslo and Gothenburg.\n8. Jordan asks Slackbot where the surplus is, then replies on Alex's post that 20 jackets are transferring from Copenhagen."
+  },
+  "canvas": {
+    "owner": "sam",
+    "channel": "onboarding-alex",
+    "title": "Stockholm store guide",
+    "markdown": "# Stockholm store guide\n\nWelcome to Northpeak Stockholm! Read this before your first shift.\n\n## Your first week\n\n- Day 1: store tour and till training with your buddy\n- Day 2: shadow shift on the floor\n- Day 3: Black Friday weekend briefing\n\n## Who to ask\n\n- Sam, Store Manager\n- Shift leads: listed in #store-stockholm\n\n## Black Friday playbook\n\n- Promo stock lives on the front rails. Keep them full.\n- If a promo line is running low, check the backroom first.\n- If the backroom is empty, raise it with Report low stock in #store-stockholm. Include sizes, a photo and how many customers have asked.\n\n## Health and safety\n\n- Keep fire exits and aisles clear at all times.\n- Report any hazard to the shift lead straight away."
+  },
+  "list": {
+    "owner": "sam",
+    "channel": "stockholm-leads",
+    "title": "New starters",
+    "columns": [
+      "Name",
+      "Start date",
+      "Store guide sign-off",
+      "Till training",
+      "Buddy shift",
+      "Status"
+    ],
+    "rows": [
+      [
+        "Alex",
+        "Mon this week",
+        "",
+        "Done",
+        "Booked Thu",
+        "In progress"
+      ],
+      [
+        "Robin",
+        "Mon this week",
+        "Done",
+        "Done",
+        "Done",
+        "Ready"
+      ],
+      [
+        "Jamie",
+        "Mon this week",
+        "Done",
+        "Done",
+        "Booked Thu",
+        "In progress"
+      ],
+      [
+        "Taylor",
+        "Tue this week",
+        "Not done",
+        "Done",
+        "Booked Fri",
+        "Chase"
+      ],
+      [
+        "Noah",
+        "Tue this week",
+        "Not done",
+        "Not done",
+        "Not booked",
+        "Chase"
+      ],
+      [
+        "Sasha",
+        "Wed this week",
+        "Done",
+        "Booked Thu",
+        "Booked Fri",
+        "In progress"
+      ]
+    ]
+  },
+  "workflows": [
+    {
+      "id": "guide",
+      "title": "I've read the guide",
+      "channel": "onboarding-alex",
+      "bookmark": true,
+      "emoji": ":white_check_mark:",
+      "form": [
+        "I have read the Stockholm store guide",
+        "I have read the Black Friday playbook",
+        "I have read the health and safety rules"
+      ],
+      "post": ":white_check_mark: {submitter} has completed the store guide sign-off.\nStore guide, Black Friday playbook and health and safety: done.\n@Sam"
+    },
+    {
+      "id": "low-stock",
+      "title": "Report low stock",
+      "channel": "store-stockholm",
+      "bookmark": true,
+      "bookmarkChannels": [
+        "store-stockholm",
+        "store-gothenburg",
+        "store-oslo",
+        "store-copenhagen",
+        "store-helsinki"
+      ],
+      "emoji": ":package:",
+      "form": [
+        "Item",
+        "Sizes running out",
+        "Backroom checked?",
+        "Customers asking today",
+        "Photo"
+      ],
+      "post": "Posts in the store channel and in #nordics-stock-requests. Alex is not a member of the Nordics channel."
+    }
+  ],
+  "bookmarks": [
+    {
+      "title": "I've read the guide",
+      "channel": "onboarding-alex",
+      "emoji": ":white_check_mark:",
+      "link": null
+    },
+    {
+      "title": "Report low stock",
+      "channel": "store-stockholm",
+      "emoji": ":package:",
+      "link": null
+    },
+    {
+      "title": "Report low stock",
+      "channel": "store-gothenburg",
+      "emoji": ":package:",
+      "link": null
+    },
+    {
+      "title": "Report low stock",
+      "channel": "store-oslo",
+      "emoji": ":package:",
+      "link": null
+    },
+    {
+      "title": "Report low stock",
+      "channel": "store-copenhagen",
+      "emoji": ":package:",
+      "link": null
+    },
+    {
+      "title": "Report low stock",
+      "channel": "store-helsinki",
+      "emoji": ":package:",
+      "link": null
+    }
+  ],
+  "stagedMessages": [
+    {
+      "id": "welcome",
+      "author": "sam",
+      "channel": "onboarding-alex",
+      "kind": "history",
+      "text": "Welcome to Northpeak, Alex! :wave: This is your onboarding channel.\nEverything for your first week is in the Stockholm store guide (pinned).\nWhen you've read it, run \"I've read the guide\" so I know you're set for the weekend. Ask me anything here."
+    },
+    {
+      "id": "stockholm-monday",
+      "author": "sam",
+      "channel": "store-stockholm",
+      "kind": "history",
+      "text": "Monday handover. The weekend delivery is in. Trailhead jackets stay on the back wall until we dress the front rails on Friday."
+    },
+    {
+      "id": "stockholm-starters",
+      "author": "sam",
+      "channel": "store-stockholm",
+      "kind": "history",
+      "text": "New starters are in this week. Till training is booked. Buddy shifts are Thursday and Friday."
+    },
+    {
+      "id": "stockholm-safety",
+      "author": "sam",
+      "channel": "store-stockholm",
+      "kind": "history",
+      "text": "Fire exits and aisles are clear. Please keep them that way once the promo rails go in."
+    },
+    {
+      "id": "stockholm-promo",
+      "author": "jordan",
+      "channel": "store-stockholm",
+      "kind": "promo",
+      "text": ":label: Black Friday weekend: Trailhead insulated jacket, 30% off, Friday to Sunday.\nPromo stock is on the front rails. Keep them full.\nIf a promo line runs low and the backroom is empty, raise it with Report low stock in this channel.\nThanks all, let's have a great weekend!"
+    },
+    {
+      "id": "stockholm-open",
+      "author": "sam",
+      "channel": "store-stockholm",
+      "kind": "history",
+      "text": "Front rails restocked, tills 1 to 4 open."
+    },
+    {
+      "id": "gothenburg-tuesday",
+      "author": "riley",
+      "channel": "store-gothenburg",
+      "kind": "history",
+      "text": "Quiet Tuesday. Ridge boots are moving. Trailhead jackets are still in the back until Friday."
+    },
+    {
+      "id": "gothenburg-plan",
+      "author": "riley",
+      "channel": "store-gothenburg",
+      "kind": "history",
+      "text": "Front rail plan is up. I'll keep M and L of the jacket together where we can see them."
+    },
+    {
+      "id": "gothenburg-promo",
+      "author": "jordan",
+      "channel": "store-gothenburg",
+      "kind": "promo",
+      "text": ":label: Black Friday weekend: Trailhead insulated jacket, 30% off, Friday to Sunday.\nPromo stock is on the front rails. Keep them full.\nIf a promo line runs low and the backroom is empty, raise it with Report low stock in this channel.\nThanks all, let's have a great weekend!"
+    },
+    {
+      "id": "gothenburg-after",
+      "author": "riley",
+      "channel": "store-gothenburg",
+      "kind": "history",
+      "text": "Rails are dressed. We're already light on M.",
+      "thread": "gothenburg-promo"
+    },
+    {
+      "id": "oslo-delivery",
+      "author": "casey",
+      "channel": "store-oslo",
+      "kind": "history",
+      "text": "Delivery was short two boxes of Summit packs. Jackets are on the floor for now."
+    },
+    {
+      "id": "oslo-plan",
+      "author": "casey",
+      "channel": "store-oslo",
+      "kind": "history",
+      "text": "Black Friday floor plan is set. The promo rail is the front window."
+    },
+    {
+      "id": "oslo-promo",
+      "author": "jordan",
+      "channel": "store-oslo",
+      "kind": "promo",
+      "text": ":label: Black Friday weekend: Trailhead insulated jacket, 30% off, Friday to Sunday.\nPromo stock is on the front rails. Keep them full.\nIf a promo line runs low and the backroom is empty, raise it with Report low stock in this channel.\nThanks all, let's have a great weekend!"
+    },
+    {
+      "id": "oslo-after",
+      "author": "casey",
+      "channel": "store-oslo",
+      "kind": "history",
+      "text": "M and L of the Trailhead jacket are the sizes I'll be watching today."
+    },
+    {
+      "id": "copenhagen-week",
+      "author": "jamie",
+      "channel": "store-copenhagen",
+      "kind": "history",
+      "text": "Good week so far. We have depth on the Trailhead jacket in M and L."
+    },
+    {
+      "id": "copenhagen-tills",
+      "author": "jamie",
+      "channel": "store-copenhagen",
+      "kind": "history",
+      "text": "Floor team is briefed for Friday. Tills 1 to 3 are the plan."
+    },
+    {
+      "id": "copenhagen-promo",
+      "author": "jordan",
+      "channel": "store-copenhagen",
+      "kind": "promo",
+      "text": ":label: Black Friday weekend: Trailhead insulated jacket, 30% off, Friday to Sunday.\nPromo stock is on the front rails. Keep them full.\nIf a promo line runs low and the backroom is empty, raise it with Report low stock in this channel.\nThanks all, let's have a great weekend!"
+    },
+    {
+      "id": "copenhagen-after",
+      "author": "jamie",
+      "channel": "store-copenhagen",
+      "kind": "history",
+      "text": "Promo stock is on the front rail. We can spare jackets if another store runs out."
+    },
+    {
+      "id": "helsinki-check",
+      "author": "jordan",
+      "channel": "store-helsinki",
+      "kind": "history",
+      "text": "Helsinki, Summit 30L is your strongest line going into the weekend. Keep that front rail full."
+    },
+    {
+      "id": "helsinki-promo",
+      "author": "jordan",
+      "channel": "store-helsinki",
+      "kind": "promo",
+      "text": ":label: Black Friday weekend: Trailhead insulated jacket, 30% off, Friday to Sunday.\nPromo stock is on the front rails. Keep them full.\nIf a promo line runs low and the backroom is empty, raise it with Report low stock in this channel.\nThanks all, let's have a great weekend!"
+    },
+    {
+      "id": "helsinki-after",
+      "author": "jordan",
+      "channel": "store-helsinki",
+      "kind": "history",
+      "text": "I'll check promo stock with you on Friday morning."
+    },
+    {
+      "id": "announce-hours",
+      "author": "jordan",
+      "channel": "announcements",
+      "kind": "announcement",
+      "text": "Black Friday weekend trading hours are on the store guide. Doors at 09:00 on Friday."
+    },
+    {
+      "id": "announce-seasonal",
+      "author": "jordan",
+      "channel": "announcements",
+      "kind": "announcement",
+      "text": "Seasonal starters are in store this week. Managers, their guide sign-off sits with you before the doors open."
+    },
+    {
+      "id": "leads-chase",
+      "author": "sam",
+      "channel": "stockholm-leads",
+      "kind": "history",
+      "text": "New starters for this week are in the list. Taylor and Noah still need a chase before Friday."
+    },
+    {
+      "id": "requests-how",
+      "author": "jordan",
+      "channel": "nordics-stock-requests",
+      "kind": "history",
+      "text": "Over the weekend, send low-stock requests here. Include the sizes and whether the backroom is empty."
+    },
+    {
+      "id": "request-oslo",
+      "author": "casey",
+      "channel": "nordics-stock-requests",
+      "kind": "low-stock",
+      "text": ":rotating_light: Low stock request: Oslo\nItem: Trailhead insulated jacket (30% off)\nSizes running out: M, L\nBackroom: Yes, empty\nCustomers asking today: 5\nReported by: Casey"
+    },
+    {
+      "id": "request-gothenburg",
+      "author": "riley",
+      "channel": "nordics-stock-requests",
+      "kind": "low-stock",
+      "text": ":rotating_light: Low stock request: Gothenburg\nItem: Trailhead insulated jacket (30% off)\nSizes running out: M\nBackroom: Yes, some left\nCustomers asking today: 6\nReported by: Riley"
+    },
+    {
+      "id": "report-stockholm",
+      "author": "jordan",
+      "channel": "nordics-store-reports",
+      "kind": "report",
+      "text": ":bar_chart: Weekly report, last week: Stockholm\nSales vs target: 112%\nFootfall: +9% on previous week\nTop seller: Trailhead insulated jacket (184 units)\nNote: sizes M and L sold through fastest.",
+      "postAs": "Northpeak Reports"
+    },
+    {
+      "id": "report-gothenburg",
+      "author": "jordan",
+      "channel": "nordics-store-reports",
+      "kind": "report",
+      "text": ":bar_chart: Weekly report, last week: Gothenburg\nSales vs target: 104%\nFootfall: +6% on previous week\nTop seller: Trailhead insulated jacket (121 units)",
+      "postAs": "Northpeak Reports"
+    },
+    {
+      "id": "report-oslo",
+      "author": "jordan",
+      "channel": "nordics-store-reports",
+      "kind": "report",
+      "text": ":bar_chart: Weekly report, last week: Oslo\nSales vs target: 108%\nFootfall: +7% on previous week\nTop seller: Trailhead insulated jacket (133 units)",
+      "postAs": "Northpeak Reports"
+    },
+    {
+      "id": "report-copenhagen",
+      "author": "jordan",
+      "channel": "nordics-store-reports",
+      "kind": "report",
+      "text": ":bar_chart: Weekly report, last week: Copenhagen\nSales vs target: 91%\nFootfall: -3% on previous week\nTop seller: Ridge hiking boot (88 units)",
+      "postAs": "Northpeak Reports"
+    },
+    {
+      "id": "report-helsinki",
+      "author": "jordan",
+      "channel": "nordics-store-reports",
+      "kind": "report",
+      "text": ":bar_chart: Weekly report, last week: Helsinki\nSales vs target: 95%\nFootfall: +1% on previous week\nTop seller: Summit 30L backpack (76 units)",
+      "postAs": "Northpeak Reports"
+    },
+    {
+      "id": "report-stock",
+      "author": "jordan",
+      "channel": "nordics-store-reports",
+      "kind": "report",
+      "text": ":package: Promo stock position, Black Friday 07:00\nTrailhead insulated jacket (30% off), units by size M / L:\n- Stockholm: 0 / 2\n- Gothenburg: 3 / 6\n- Oslo: 1 / 0\n- Copenhagen: 18 / 14\n- Helsinki: 12 / 10",
+      "postAs": "Northpeak Reports"
+    }
+  ],
+  "readyReplies": [
+    {
+      "id": "jordan-transfer",
+      "author": "jordan",
+      "channel": "store-stockholm",
+      "when": "After Alex's low-stock post, in that thread. Glance at the phone as the notification lands.",
+      "text": "@Alex thanks for flagging. 20 Trailhead jackets in M and L are transferring from Copenhagen, arriving tomorrow at 10:00."
+    }
+  ],
+  "slackbot": {
+    "prompts": [
+      {
+        "who": "sam",
+        "prompt": "How did Stockholm perform last week, and what should I watch this weekend?",
+        "expects": "112% of target, footfall +9%, Trailhead jacket top seller (184), and M and L already low today."
+      },
+      {
+        "who": "jordan",
+        "prompt": "Which stores are running low on Trailhead jackets, and which stores have surplus we can move today?",
+        "expects": "Low: Stockholm, Oslo, Gothenburg. Surplus: Copenhagen (18 M / 14 L) and Helsinki (12 M / 10 L)."
+      }
+    ]
+  },
+  "notInLiveDemo": [
+    "A live huddle",
+    "An admin invite"
+  ],
+  "limits": [
+    "Frontline Members cannot use Slackbot, create canvases or lists, or start huddles.",
+    "Frontline Members can run workflows and open content a Full Member shares in their channels.",
+    "Slackbot stays on Sam and Jordan.",
+    "Do not show or claim QR sign-in, native shift scheduling, or off-shift blocking."
+  ],
+  "checks": [
+    "The Frontline add-on is on, and Alex is a Frontline Member.",
+    "I've read the guide and Report low stock work as Alex on a phone.",
+    "Alex can open the onboarding canvas on a phone.",
+    "Beat 1 is pre-recorded as a fallback.",
+    "Sam and Jordan use separate Chrome profiles, and phone mirroring has been tested."
+  ],
+  "manualSteps": [
+    {
+      "id": "install-slack-app",
+      "title": "Install the workspace app on the Enterprise Grid org",
+      "detail": "Create a Slack app from slack/manifest.json and install it on the Enterprise Grid org, not on a single workspace. Grant it to workspaces created later, and approve it if an admin must. Reinstall after a manifest change so the new scopes are granted. This app creates the workspace, invites users, and stages channels. People do not message it."
+    },
+    {
+      "id": "slack-token",
+      "title": "Store the org-admin Slack token",
+      "detail": "Keep the org-admin user token in the coding agent's secret store as SLACK_ADMIN_TOKEN. The shared cast is Alex, Sam, Jordan, Riley, Casey, and Jamie. Persona tokens use SLACK_TOKEN_ALEX, SLACK_TOKEN_SAM, SLACK_TOKEN_JORDAN, SLACK_TOKEN_RILEY, SLACK_TOKEN_CASEY, and SLACK_TOKEN_JAMIE. Reuse these users for later demos. Keep the tokens out of git."
+    },
+    {
+      "id": "frontline-accounts",
+      "title": "Make Alex a Frontline Member",
+      "detail": "Turn on the Frontline add-on. Alex is a Frontline Member with exactly #onboarding-alex, #store-stockholm, and #announcements, and they are out of #general and #random. Sam and Jordan are Full Members. Riley, Casey, and Jamie are the Gothenburg, Oslo, and Copenhagen managers. Use separate Chrome profiles for Sam and Jordan, and test phone mirroring for Alex. Do this before the webinar. The live demo does not include an admin invite."
+    },
+    {
+      "id": "workflows",
+      "title": "Build the workflows and test them on a phone",
+      "detail": "In Workflow Builder, create I've read the guide in #onboarding-alex and Report low stock in every store channel. I've read the guide ticks Alex's row on the New starters List. Report low stock posts in the store channel and in #nordics-stock-requests, which Alex is not in. Test both as Alex on a phone, including a photo from the camera roll, and open the Stockholm store guide on that phone. Then bookmark them."
+    },
+    {
+      "id": "stage-personas",
+      "title": "Post any staged lines the tokens did not send",
+      "detail": "Each staged message is posted as that person. Weekly reports post as Jordan until a bot token can send them as Northpeak Reports. Where a persona token is missing, sign in as that person and paste the line from the dry-run. Leave Jordan's transfer reply unsent until Alex has raised the low stock. Put a photo of a near-empty rail in Alex's camera roll before the webinar."
+    },
+    {
+      "id": "fallback-recording",
+      "title": "Pre-record Alex's beat",
+      "detail": "Record Beat 1 on the phone as a fallback before the webinar. The live path is still Alex in Slack, with no huddle."
+    }
+  ],
+  "agentSteps": [
+    {
+      "id": "confirm-grid",
+      "title": "Confirm the Enterprise Grid org",
+      "detail": "Use the existing Slack Enterprise+ workspace in the Frontline org. Do not create a second workspace. This demo is Slack only."
+    },
+    {
+      "id": "slack-surface",
+      "title": "Workspace Northpeak Outdoor",
+      "detail": "Keep the existing workspace and set its display name to Northpeak Outdoor. Leave the workspace domain as it is. The app is already installed on the Enterprise Grid org."
+    },
+    {
+      "id": "channels",
+      "title": "Create the channels",
+      "detail": "Keep 10 channels in the existing workspace. Alex's home is onboarding-alex, store-stockholm, announcements. They are not a member of the other store channels."
+    },
+    {
+      "id": "canvas",
+      "title": "Add Sam's onboarding canvas",
+      "detail": "Create the canvas \"Stockholm store guide\" with canvases.create as Sam, tabbed into #onboarding-alex. Frontline Members can open a canvas a Full Member shares. They do not create one."
+    },
+    {
+      "id": "stage-history",
+      "title": "Post the staged history",
+      "detail": "Post each staged message with that person's user token. Weekly reports post as Jordan until a bot token can send them as Northpeak Reports. Leave Jordan's transfer reply unsent until Alex has raised the low stock."
+    },
+    {
+      "id": "bookmarks",
+      "title": "Bookmark the workflows",
+      "detail": "I've read the guide in #onboarding-alex, Report low stock in #store-stockholm, Report low stock in #store-gothenburg, Report low stock in #store-oslo, Report low stock in #store-copenhagen, Report low stock in #store-helsinki"
+    },
+    {
+      "id": "save-spec",
+      "title": "Save the spec",
+      "detail": "Write this plan to demos/northpeak-outdoor.json. Put the Slack workspace id, channel ids, and message timestamps only in demos/northpeak-outdoor.links.json."
+    },
+    {
+      "id": "handoff",
+      "title": "Hand off the live demo",
+      "detail": "Stop here. Northpeak Outdoor opens with Alex already in Slack. Do not run an admin invite on stage, and do not start a huddle."
+    }
+  ],
+  "talkTrack": [
+    {
+      "label": "Beat 1",
+      "show": "Home",
+      "say": "Alex started this week. No company email, no sidebar of 40 channels. Just what she needs."
+    },
+    {
+      "label": "Beat 2",
+      "show": "Onboarding",
+      "say": "Her own onboarding channel, with her manager in it. She's just learned the rule she's about to use."
+    },
+    {
+      "label": "Beat 3",
+      "show": "Promo",
+      "say": "HQ's promo plan, on the phone in her pocket before the doors open."
+    },
+    {
+      "label": "Beat 4",
+      "show": "Low stock",
+      "say": "The till knows what sold. It doesn't know the backroom is empty or that eight customers walked out without a jacket. Alex does."
+    },
+    {
+      "label": "Switch",
+      "show": "Sam on desktop",
+      "say": "Now let's see what that looks like for her store manager."
+    },
+    {
+      "label": "Beat 5",
+      "show": "Manager",
+      "say": "Sam runs every seasonal start from one view, and can see exactly who to chase before the weekend rush."
+    },
+    {
+      "label": "Beat 6",
+      "show": "Store performance",
+      "say": "Sam gets last week's numbers and today's floor reality in one answer, without opening a report."
+    },
+    {
+      "label": "Switch",
+      "show": "Jordan on desktop",
+      "say": "And at HQ, with 60 stores, Jordan needs the bigger picture."
+    },
+    {
+      "label": "Beat 7",
+      "show": "HQ",
+      "say": "Three stores, same jacket, same morning. That's not three problems, it's one."
+    },
+    {
+      "label": "Beat 8",
+      "show": "Transfer",
+      "say": "The frontline doesn't need AI on their phones for HQ to get AI-level visibility of the floor. And the answer goes straight back to the person standing at the empty rail."
+    },
+    {
+      "label": "Close",
+      "show": "Spoken close",
+      "say": "One Enterprise+ security layer covers the whole workforce, with up to 10 channels per worker, accounts that expire for seasonal staff, and SCIM provisioning. The Bryd fixed-scope Frontline launch includes the Enterprise+ migration where it is needed, with a December start."
+    }
+  ],
+  "tag": "frontline-demo:northpeak-outdoor"
+}

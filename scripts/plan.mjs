@@ -3,12 +3,12 @@
  * Gate ids match demos/manual-gates.json. There is no Salesforce step.
  */
 
-import { NORRHEM_INPUT } from "./norrhem.mjs";
+import { NORTHPEAK_INPUT } from "./northpeak.mjs";
 
-export { NORRHEM_INPUT };
+export { NORTHPEAK_INPUT };
 
 export const FRONTLINE_CHANNEL_CAP = 10;
-const REQUIRED_WORKFLOWS = ["induction", "issue", "handover", "acknowledge"];
+const REQUIRED_WORKFLOWS = ["guide", "low-stock"];
 const MANUAL_IDS = [
   "install-slack-app",
   "slack-token",
@@ -68,22 +68,6 @@ function peopleById(input) {
   return new Map(people.map((person) => [person.id, person]));
 }
 
-function acknowledgeBlocks(link) {
-  return [
-    {
-      type: "actions",
-      elements: [
-        {
-          type: "button",
-          text: { type: "plain_text", text: "Acknowledge" },
-          url: link,
-          action_id: "acknowledge_price_change",
-        },
-      ],
-    },
-  ];
-}
-
 export function buildPlan(input, catalog) {
   const industry = String(input.industry || "").trim();
   const useCase = String(input.useCase || "").trim();
@@ -134,7 +118,6 @@ export function buildPlan(input, catalog) {
   }
 
   const knownPeople = peopleById(input);
-  const acknowledge = workflows.find((item) => item.id === "acknowledge");
   const stagedMessages = (input.history || []).map((message) => {
     if (!names.has(message.channel)) throw new Error(`Unknown channel on ${message.id}: ${message.channel}`);
     if (!knownPeople.has(message.author)) throw new Error(`Unknown author on ${message.id}: ${message.author}`);
@@ -146,20 +129,20 @@ export function buildPlan(input, catalog) {
       text: message.text,
     };
     if (message.thread) copy.thread = message.thread;
-    if (copy.kind === "price-change" && acknowledge?.link) {
-      copy.blocks = acknowledgeBlocks(acknowledge.link);
-    }
+    if (message.postAs) copy.postAs = message.postAs;
     return copy;
   });
 
   const bookmarks = workflows
     .filter((item) => item.bookmark)
-    .map((item) => ({
-      title: item.title,
-      channel: item.channel,
-      emoji: item.emoji || ":bookmark:",
-      link: item.link || null,
-    }));
+    .flatMap((item) =>
+      (item.bookmarkChannels || [item.channel]).map((channel) => ({
+        title: item.title,
+        channel,
+        emoji: item.emoji || ":bookmark:",
+        link: item.link || null,
+      })),
+    );
 
   const tag = `frontline-demo:${id}`;
   const gates = MANUAL_IDS.map((item) => gate(catalog, item));
@@ -175,17 +158,17 @@ export function buildPlan(input, catalog) {
       id: "confirm-grid",
       title: "Confirm the Enterprise Grid org",
       detail:
-        "Use the Slack Enterprise+ org with the Frontline add-on. Create a new workspace on that org. This demo is Slack only.",
+        "Use the existing Slack Enterprise+ workspace in the Frontline org. Do not create a second workspace. This demo is Slack only.",
     },
     {
       id: "slack-surface",
       title: `Workspace ${company}`,
-      detail: `Create a workspace named ${company} with admin.teams.create. Use team_domain ${workspaceDomain}. The app is already installed on the Enterprise Grid org and granted to new workspaces. Pass the new workspace id as team_id on later calls.`,
+      detail: `Keep the existing workspace and set its display name to ${company}. Leave the workspace domain as it is. The app is already installed on the Enterprise Grid org.`,
     },
     {
       id: "channels",
       title: "Create the channels",
-      detail: `Create ${channels.length} channels with admin.conversations.create in the new workspace. ${frontline.name}'s home is ${frontlineChannels.join(", ")}. They are not a member of the other store channels.`,
+      detail: `Keep ${channels.length} channels in the existing workspace. ${frontline.name}'s home is ${frontlineChannels.join(", ")}. They are not a member of the other store channels.`,
     },
     {
       id: "canvas",
@@ -195,14 +178,14 @@ export function buildPlan(input, catalog) {
     {
       id: "stage-history",
       title: "Post the staged history",
-      detail:
-        `Post each staged message with that person's user token. Thread the store acknowledgements under ${hq.name}'s price-change message. Leave ${frontline.name}'s moved reply unsent.`,
+      detail: `Post each staged message with that person's user token. Weekly reports post as ${hq.name} until a bot token can send them as Northpeak Reports. Leave ${hq.name}'s transfer reply unsent until Alex has raised the low stock.`,
     },
     {
       id: "bookmarks",
-      title: "Bookmark the three workflows",
-      detail:
-        "When the Workflow Builder links exist, bookmarks.add Complete my induction in #onboarding, Report an issue in #food-safety, and End-of-shift handover in #store-uppsala. Acknowledge stays a button on the price-change message.",
+      title: "Bookmark the workflows",
+      detail: bookmarks
+        .map((item) => `${item.title} in #${item.channel}`)
+        .join(", "),
     },
     {
       id: "save-spec",
@@ -238,7 +221,7 @@ export function buildPlan(input, catalog) {
     {
       label: "Switch",
       show: `${hq.name} on desktop`,
-      say: `And at HQ, with 40 stores, ${hq.name} needs the bigger picture.`,
+      say: `And at HQ, with ${input.storyScale?.storesInTheChain || "the"} stores, ${hq.name} needs the bigger picture.`,
     },
     ...steps.slice(hqAt),
     {
@@ -267,6 +250,7 @@ export function buildPlan(input, catalog) {
       story: [company, sentence(useCase), ...beats.map((beat, index) => `${index + 1}. ${sentence(beat.text)}`)].join("\n"),
     },
     canvas,
+    list: input.list || null,
     workflows,
     bookmarks,
     stagedMessages,
@@ -276,12 +260,12 @@ export function buildPlan(input, catalog) {
     limits: [
       "Frontline Members cannot use Slackbot, create canvases or lists, or start huddles.",
       "Frontline Members can run workflows and open content a Full Member shares in their channels.",
-      `Slackbot stays on ${hq.name}'s side.`,
+      `Slackbot stays on ${manager.name} and ${hq.name}.`,
       "Do not show or claim QR sign-in, native shift scheduling, or off-shift blocking.",
     ],
     checks: [
       `The Frontline add-on is on, and ${frontline.name} is a Frontline Member.`,
-      `Acknowledge and the three bookmarked workflows work as ${frontline.name} on a phone.`,
+      `I've read the guide and Report low stock work as ${frontline.name} on a phone.`,
       `${frontline.name} can open the onboarding canvas on a phone.`,
       "Beat 1 is pre-recorded as a fallback.",
       `${manager.name} and ${hq.name} use separate Chrome profiles, and phone mirroring has been tested.`,
