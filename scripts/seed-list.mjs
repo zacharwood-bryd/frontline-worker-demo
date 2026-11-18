@@ -1,6 +1,7 @@
 /**
- * Create the New starters list as the org admin, then make Sam the owner.
- * Requires lists:write on SLACK_ADMIN_TOKEN. Safe to run again.
+ * Create the New starters list with the bot token, share it into
+ * #stockholm-leads, bookmark it, and make Sam the owner.
+ * Requires lists:write on SLACK_BOT_TOKEN. Safe to run again.
  */
 
 import { readFileSync, writeFileSync } from "node:fs";
@@ -75,11 +76,57 @@ async function main() {
   }
 
   const channelId = links.channels[list.channel];
-  const shared = await slack(token, "slackLists.access.set", {
+  const needsChannel = !links.bookmarks?.[list.title];
+  let shared = await slack(token, "slackLists.access.set", {
     list_id: listId,
     access_level: "write",
     channel_ids: [channelId],
   });
+  if ((!shared.ok && shared.error === "channel_not_found") || needsChannel) {
+    if (process.env.SLACK_ADMIN_TOKEN && process.env.SLACK_BOT_TOKEN) {
+      const me = await slack(token, "auth.test", {});
+      const invited = await slack(process.env.SLACK_ADMIN_TOKEN, "admin.conversations.invite", {
+        channel_id: channelId,
+        user_ids: me.user_id,
+      });
+      console.log("invite bot", invited.ok, invited.error || "");
+      if (!shared.ok) {
+        shared = await slack(token, "slackLists.access.set", {
+          list_id: listId,
+          access_level: "write",
+          channel_ids: [channelId],
+        });
+      }
+      if (needsChannel) {
+        const bookmark = await slack(token, "bookmarks.add", {
+          channel_id: channelId,
+          title: list.title,
+          type: "link",
+          link: `https://zac-bryd-sandbox.enterprise.slack.com/lists/${links.teamId}/${listId}`,
+          emoji: ":ledger:",
+        });
+        console.log("bookmark", bookmark.ok, bookmark.error || "");
+        if (bookmark.ok) {
+          links.bookmarks = { ...(links.bookmarks || {}), [list.title]: bookmark.bookmark?.id || true };
+          writeFileSync(linksPath, `${JSON.stringify(links, null, 2)}\n`);
+        }
+      }
+      const history = await slack(token, "conversations.history", { channel: channelId, limit: 20 });
+      const notices = (history.messages || []).filter((message) => message.subtype === "bot_message");
+      if (notices.length) {
+        const adminUser = await slack(process.env.SLACK_ADMIN_TOKEN, "auth.test", {});
+        await slack(process.env.SLACK_ADMIN_TOKEN, "admin.conversations.invite", {
+          channel_id: channelId,
+          user_ids: adminUser.user_id,
+        });
+        for (const message of notices) {
+          await slack(process.env.SLACK_ADMIN_TOKEN, "chat.delete", { channel: channelId, ts: message.ts });
+        }
+        await slack(process.env.SLACK_ADMIN_TOKEN, "conversations.leave", { channel: channelId });
+      }
+      await slack(token, "conversations.leave", { channel: channelId });
+    }
+  }
   console.log("share", shared.ok, shared.error || list.channel);
 
   const owned = await slack(token, "slackLists.access.set", {
