@@ -291,7 +291,7 @@ export const NORTHPEAK_INPUT = {
       kind: "history",
       text: [
         "Welcome to Northpeak, Alex! :wave: This is your onboarding channel.",
-        "Your first week is in the Onboarding - Alex, Stockholm canvas at the top of this channel. Read it before your first shift. It covers the floor, the tills, Black Friday, and who to ask.",
+        "Your first week is in Onboarding - Alex, Stockholm. Read it before your first shift. It covers the floor, the tills, Black Friday, and who to ask.",
         "When you have worked through it, tap Complete onboarding checklist at the top of the channel so I know you're set for the weekend. Ask me anything here.",
       ].join("\n"),
     },
