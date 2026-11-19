@@ -235,7 +235,7 @@ export const NORTHPEAK_INPUT = {
   channels: [
     {
       name: "onboarding-alex",
-      purpose: "Alex's personal onboarding. The Stockholm store guide is the channel canvas.",
+      purpose: "Alex's personal onboarding. The channel canvas is Onboarding - Alex, Stockholm.",
       frontline: true,
     },
     {
@@ -291,7 +291,7 @@ export const NORTHPEAK_INPUT = {
       kind: "history",
       text: [
         "Welcome to Northpeak, Alex! :wave: This is your onboarding channel.",
-        "Your first week is in the Stockholm store guide canvas at the top of this channel. Read it before your first shift. It covers the floor, the tills, Black Friday, and who to ask.",
+        "Your first week is in the Onboarding - Alex, Stockholm canvas at the top of this channel. Read it before your first shift. It covers the floor, the tills, Black Friday, and who to ask.",
         "When you have worked through it, tap Complete onboarding checklist at the top of the channel so I know you're set for the weekend. Ask me anything here.",
       ].join("\n"),
     },
@@ -550,7 +550,7 @@ export const NORTHPEAK_INPUT = {
   canvas: {
     owner: "sam",
     channel: "onboarding-alex",
-    title: "Stockholm store guide",
+    title: "Onboarding - Alex, Stockholm",
     markdown: CANVAS_MARKDOWN,
   },
   list: {
